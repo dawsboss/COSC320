@@ -1,0 +1,27 @@
+//This namespoace is used for logging data into files
+#include<iostream>
+#include<fstream>
+
+namespace Logger{
+  std::string filename;
+  std::fstream file;
+
+  //Name the file with no file type
+  void init(std::string f){
+    filename = f;
+    file.open(f+".txt", std::ios::out);
+  }
+
+  void close(){
+    file.close();
+  }
+
+  void log(std::string s){
+    file << s << std::endl;
+  }
+
+
+  std::string getFile(){
+    return filename;
+  }
+};
