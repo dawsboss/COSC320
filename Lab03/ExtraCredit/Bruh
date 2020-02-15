@@ -1,0 +1,92 @@
+Heap : Random : # of elements: 10
+elapsed time(s): 0.000005
+ Swaps: 0
+Heap : Accending 
+elapsed time(s): 0.000005
+ Swaps: 0
+Heap : Decending 
+elapsed time(s): 0.000004
+ Swaps: 0
+Heap : Random : # of elements: 100
+elapsed time(s): 0.000069
+ Swaps: 0
+Heap : Accending 
+elapsed time(s): 0.000060
+ Swaps: 0
+Heap : Decending 
+elapsed time(s): 0.000050
+ Swaps: 0
+Heap : Random : # of elements: 500
+elapsed time(s): 0.000375
+ Swaps: 0
+Heap : Accending 
+elapsed time(s): 0.000396
+ Swaps: 0
+Heap : Decending 
+elapsed time(s): 0.000340
+ Swaps: 0
+Heap : Random : # of elements: 1000
+elapsed time(s): 0.000930
+ Swaps: 0
+Heap : Accending 
+elapsed time(s): 0.000936
+ Swaps: 0
+Heap : Decending 
+elapsed time(s): 0.000770
+ Swaps: 0
+Heap : Random : # of elements: 2500
+elapsed time(s): 0.002425
+ Swaps: 0
+Heap : Accending 
+elapsed time(s): 0.002350
+ Swaps: 0
+Heap : Decending 
+elapsed time(s): 0.002140
+ Swaps: 0
+Heap : Random : # of elements: 5000
+elapsed time(s): 0.005091
+ Swaps: 0
+Heap : Accending 
+elapsed time(s): 0.004707
+ Swaps: 0
+Heap : Decending 
+elapsed time(s): 0.004257
+ Swaps: 0
+Heap : Random : # of elements: 7500
+elapsed time(s): 0.007113
+ Swaps: 0
+Heap : Accending 
+elapsed time(s): 0.006525
+ Swaps: 0
+Heap : Decending 
+elapsed time(s): 0.005953
+ Swaps: 0
+Heap : Random : # of elements: 10000
+elapsed time(s): 0.008629
+ Swaps: 0
+Heap : Accending 
+elapsed time(s): 0.007897
+ Swaps: 0
+Heap : Decending 
+elapsed time(s): 0.007068
+ Swaps: 0
+Heap : Random : # of elements: 25000
+elapsed time(s): 0.019999
+ Swaps: 0
+Heap : Accending 
+elapsed time(s): 0.017821
+ Swaps: 0
+Heap : Decending 
+elapsed time(s): 0.016591
+ Swaps: 0
+Heap : Random : # of elements: 50000
+elapsed time(s): 0.038640
+ Swaps: 0
+Heap : Accending 
+elapsed time(s): 0.037598
+ Swaps: 0
+Heap : Decending 
+elapsed time(s): 0.035439
+ Swaps: 0
+ 
+End
