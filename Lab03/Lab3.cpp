@@ -231,11 +231,11 @@ void timeSort(void (*sort)(Heap*), Heap* A){
 
   sort(A);
 
-	// if(!isSorted(A)){
-	// 	Logger::log("Did not Sort!----------------------------------------------------- Error: Oof");
-	// 	std::cout<<"You are big dumb and it ain't no sorted"<<std::endl;
-	// 	return;
-	// }
+	 if(!isSorted(A)){
+	 	Logger::log("Did not Sort!----------------------------------------------------- Error: Oof");
+	 	std::cout<<"You are big dumb and it ain't no sorted"<<std::endl;
+	 	return;
+	 }
 
   auto end=std::chrono::system_clock::now();
   std::chrono::duration<double> elapsed_seconds = end-start;
@@ -280,7 +280,7 @@ int main(){
   	// static fn Sorters[] = {MergeSort, QuickSort};
   //for loop 1 - goes through all array sizes (size[10])
   //for loop 2 - goes through all types of sorting types we have (Merge, Quick)
-  //for loop 3 - goes through all types of arrays to be sorted (Random, Accending, Decending)
+  //for loop 3 - goes through all tyisSortpes of arrays to be sorted (Random, Accending, Decending)
     for(int i=0; i<sizes; i++){
       for(int FuncI=0;FuncI<1;FuncI++){
         for(int j=0;j<3;j++){

@@ -231,11 +231,11 @@ void timeSort(void (*sort)(Heap*), Heap* A){
 
   sort(A);
 
-	// if(!isSorted(A)){
-	// 	Logger::log("Did not Sort!----------------------------------------------------- Error: Oof");
-	// 	std::cout<<"You are big dumb and it ain't no sorted"<<std::endl;
-	// 	return;
-	// }
+	if(!isSorted(A)){
+		Logger::log("Did not Sort!----------------------------------------------------- Error: Oof");
+		std::cout<<"You are big dumb and it ain't no sorted"<<std::endl;
+		return;
+	}
 
   auto end=std::chrono::system_clock::now();
   std::chrono::duration<double> elapsed_seconds = end-start;
