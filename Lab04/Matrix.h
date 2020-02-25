@@ -7,8 +7,8 @@
 class Matrix{
 private:
   int** arr;//Matrix
-  unsigned long long n;//Rows
-  unsigned long long m;//Columns
+  unsigned long long Rows;//n
+  unsigned long long Columns;//m
 
 public:
   Matrix();//Defualt Constructor
@@ -17,17 +17,14 @@ public:
   ~Matrix();//Deconstructor
   Matrix* operator=(const Matrix& B);//= operator
 
-  unsigned long long getN(){ return n; }
-  unsigned long long getM(){ return m; }
+  unsigned long long getN(){ return Rows; }
+  unsigned long long getM(){ return Columns; }
   void print();//prints out matrix as if it was a matrix
   void init();//initializes values to the whole matrix
+  
+  //sets the matrix to have all the same number x
+  void setMatrix(int);
 
-//  unsigned long long operator[][](int, int);//allows you to call [][] operaot as if te matrix was an array
-  //off brand verssion below
-  int getArrSpot(unsigned long long, unsigned long long);
-//
-  //offBrand verssion
-  void setArrSpot(unsigned long long, unsigned long long, int);
 
 
   Matrix operator+(Matrix B);//Add two matrixies together

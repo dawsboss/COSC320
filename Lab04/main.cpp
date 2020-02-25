@@ -1,17 +1,24 @@
 #include "Matrix.h"
 
 int main(){
-  std::cout<<"Test\n";
   unsigned long long x=4;
   unsigned long long y=4;
   Matrix B(x,y);
-
   Matrix A(x,y);
-  A.init();
-  B.init();
+  A.setMatrix(2);
+  A.print();
+  B.setMatrix(8);
+  //A = A+B;
+  try{
+    A = A*B;
+  }catch(std::string s){
+    std::cout<<s<<std::endl;
+  }catch(...){
+    std::cout<<"unknown error \n";
+  }
 
-    A = A*3;
-    std::cout<<"Test8\n";
-    A.print();
+
+  std::cout<<std::endl;
+  A.print();
   return 0;
 }
