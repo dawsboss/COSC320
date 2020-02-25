@@ -1,8 +1,11 @@
-Include a README file to document your code, any interesting design choices you made, and answer the following questions completely and thoroughly:
+### Grant Dawson
+
+# Heap Sort and Appications
+
 NOTE: To test the prints they are in the buildHeap function and are just commented out
 NOTE: These files are also setup to make there own text file (you pick the name in main in init) and will put all results to these files
 
-(a)  Summarize your approach to the problem, and how your code addresses the abstractions needed.
+##### (a)  Summarize your approach to the problem, and how your code addresses the abstractions needed.
     This program has 4 main functions. 2 of these main functions are designed to only build a max heap.
     MaxHeapify - makes sure everything from the given node and it's children follow the rules of max heap in that the array is set up as it was a tree.
       So it takes the heap and a given index of where to start and it makes sure that the parent and left/right are in correct order and if it fixes makes sure it
