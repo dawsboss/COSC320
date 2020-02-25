@@ -24,21 +24,21 @@ NOTE: These files are also setup to make there own text file (you pick the name 
        (Node 1) (Node 2)
   (Node 3) (Node 4) (Node 5)
 
-(b)  What is the theoretical time complexity of your sorting algorithm (best and worst case), in terms of the array size?
+#### (b)  What is the theoretical time complexity of your sorting algorithm (best and worst case), in terms of the array size?
 Best and worst case: O(n*log(n)), n-array size
-(c)  Test your sorting algorithm on different size and types of arrays, as you did with labs 1 and 2.Be sure to vary the parameters enough to use the observations to answer the next questions!
-(d)  How does the absolute timing scale with the number of elements in the array?  The size of the elements?
+#### (c)  Test your sorting algorithm on different size and types of arrays, as you did with labs 1 and 2.Be sure to vary the parameters enough to use the observations to answer the next questions!
+#### (d)  How does the absolute timing scale with the number of elements in the array?  The size of the elements?
 Use the data collected to rectify this with the theoretical time complexity, e.g.  what n on-asymptotic function of n mostly closely matches the timings that you observe as n grows?
     To visulize the relation between the times and swaps vs the number of elements in the array, I made an extra graph with the swap and time graphs that
       shows the relation to their big O counter part and that the times and the amount of swpas and the time it takes are related to the number of
       elements by n*log2(n). With that we can look at the graphs and see how close they are and how they hold the same shape as one another (n*log2(n) vs time and swaps graphs)
 
 
-(e)  Aggregate your data into a graph of the complexity for the various array sizes, for example with a spreadsheet program like LibreOffice Calc or Microsoft Word.
-(f)  How does the sort perform in different cases?  What is the best and worst case, according to your own test results?
+#### (e)  Aggregate your data into a graph of the complexity for the various array sizes, for example with a spreadsheet program like LibreOffice Calc or Microsoft Word.
+##### (f)  How does the sort perform in different cases?  What is the best and worst case, according to your own test results?
     The sorts preformed primially very similar no matter what case was given but I did notice that the decending arrays had less swaps done in them apposed to
       Accending and deccending arrays.
 
-  (g)  How could the code be improved in terms of usability, efficiency, and robustness?
+##### (g)  How could the code be improved in terms of usability, efficiency, and robustness?
     This is an extremely efficient and well thought out design but I can't help but feel that there could be a better method than switching one of the
       smallest elements in the array with the biggest. But all around this as efficient or more efficient as the previous sorts.
