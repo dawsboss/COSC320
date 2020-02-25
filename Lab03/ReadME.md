@@ -5,7 +5,7 @@
 NOTE: To test the prints they are in the buildHeap function and are just commented out
 NOTE: These files are also setup to make there own text file (you pick the name in main in init) and will put all results to these files
 
-##### (a)  Summarize your approach to the problem, and how your code addresses the abstractions needed.
+#### (a)  Summarize your approach to the problem, and how your code addresses the abstractions needed.
 * This program has 4 main functions. 2 of these main functions are designed to only build a max heap.
 * MaxHeapify - makes sure everything from the given node and it's children follow the rules of max heap in that the array is set up as it was a tree.
 So it takes the heap and a given index of where to start and it makes sure that the parent and left/right are in correct order and if it fixes makes sure it
@@ -29,8 +29,8 @@ Use the data collected to rectify this with the theoretical time complexity, e.g
 
 
 #### (e)  Aggregate your data into a graph of the complexity for the various array sizes, for example with a spreadsheet program like LibreOffice Calc or Microsoft Word.
-##### (f)  How does the sort perform in different cases?  What is the best and worst case, according to your own test results?
+#### (f)  How does the sort perform in different cases?  What is the best and worst case, according to your own test results?
 The sorts preformed primially very similar no matter what case was given but I did notice that the decending arrays had less swaps done in them apposed to Accending and deccending arrays.
 
-##### (g)  How could the code be improved in terms of usability, efficiency, and robustness?
+#### (g)  How could the code be improved in terms of usability, efficiency, and robustness?
 This is an extremely efficient and well thought out design but I can't help but feel that there could be a better method than switching one of the smallest elements in the array with the biggest. But all around this as efficient or more efficient as the previous sorts.
