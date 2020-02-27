@@ -1,50 +1,28 @@
 #include "Matrix.h"
 
-// #include <iostream>
-// #include "Logger.h"
-//
-// class Matrix{
-// private:
-//   int** arr;//Matrix
-//   unsigned long long n;//Rows
-//   unsigned long long m;//Columns
-//
-// public:
-//   Matrix();//Defualt Constructor
-//   Matrix(unsigned long long , unsigned long long );
-//   Matrix(const Matrix&);
-//   ~Matrix();//Deconstructor
-//
-//
-//   Matrix* operator+(Matrix B);//Add two matrixies together
-//   Matrix* operator-(Matrix B);//subtract matrix A from matrix B
-//   Matrix* operator*(Matrix B);//Multiply Matrix A and B
-//
-//
-// };
-//
-//
-// };
-
-Matrix::Matrix(){
+template<class DataType>
+Matrix<DataType>::Matrix(){
   Rows = 0;
   Columns = 0;
 }
-Matrix::Matrix(unsigned long long An, unsigned long long Am){
+
+template <class DataType>
+Matrix<DataType>::Matrix(unsigned long long An, unsigned long long Am){
   Rows=An;
   Columns=Am;
-  arr = new int* [An];
+  arr = new DataType* [An];
   for(unsigned long long i=0; i<this->Rows; i++){
-    arr[i]=new int [Am];
+    arr[i]=new DataType [Am];
   }
 }
 
-Matrix::Matrix(const Matrix& B){
+template<class DataType>
+Matrix<DataType>::Matrix(const Matrix& B){
   this->Rows=B.Rows;
   this->Columns=B.Columns;
-  this->arr = new int* [this->Rows];
+  this->arr = new DataType* [this->Rows];
    for(unsigned long long i=0; i<this->Rows; i++){
-    arr[i]=new int [this->Columns];
+    arr[i]=new DataType [this->Columns];
   }
 
   for(unsigned long long i=0; i<this->Rows; i++){
@@ -55,7 +33,8 @@ Matrix::Matrix(const Matrix& B){
 
 }
 
-Matrix::~Matrix(){
+template<class DataType>
+Matrix<DataType>::~Matrix(){
   for(unsigned long long i=0; i<this->Rows; i++){
     delete[] arr[i];
   }
@@ -63,22 +42,21 @@ Matrix::~Matrix(){
 }
 
 //= operator
-Matrix* Matrix::operator=(const Matrix& B){
+template<class DataType>
+Matrix<DataType>* Matrix<DataType>::operator=(const Matrix& B){
   if((this) == &B){
     return (this);
   }
-  if(this->Columns != 0 || this->Rows !=0){
-    for(unsigned long long i=0; i<this->Columns; i++){
-      delete[] arr[i];
-    }
-    delete [] arr;
+  for(unsigned long long i=0; i<this->Columns; i++){
+    delete[] arr[i];
   }
+  delete [] arr;
 
   this->Rows=B.Rows;
   this->Columns=B.Columns;
-  this->arr = new int* [this->Rows];
+  this->arr = new DataType* [this->Rows];
    for(unsigned long long i=0; i<this->Rows; i++){
-    arr[i]=new int [this->Columns];
+    arr[i]=new DataType [this->Columns];
   }
 
   for(unsigned long long i=0; i<this->Rows; i++){
@@ -91,19 +69,20 @@ Matrix* Matrix::operator=(const Matrix& B){
 }
 
 //Gives access to the arr[][] rows columns
-int Matrix::getElement(unsigned long long i, unsigned long long j){
+template<class DataType>
+DataType Matrix<DataType>::getElement(unsigned long long i, unsigned long long j){
       return this->arr[i][j];
 }
 
 
 //prints the matrix just like it wouls appear as a matrix
-void Matrix::print(){
+template<class DataType>
+void Matrix<DataType>::print(){
   if(this->Rows == 0 || this->Columns == 0){
-    std::string s ="Matrix is empty\n";
-    throw s;
+    std::cout<<"Matrix empty\n";
   }
-  for (int j = 0; j < this->Rows; j++) {
-    for (int i = 0; i < this->Columns; i++) {
+  for (unsigned long long j = 0; j < this->Rows; j++) {
+    for (unsigned i = 0; i < this->Columns; i++) {
         std::cout << this->arr[j][i] <<" ";
     }
     std::cout<<std::endl;
@@ -112,13 +91,13 @@ void Matrix::print(){
 }
 
 //initilizaes a matrix with top left 0s and bottom right 0s and the middle 1s
-void Matrix::init(){
+template<class DataType>
+void Matrix<DataType>::init(){
   if(this->Rows == 0 || this->Columns == 0){
-    std::string s ="No room (m or n == 0)\n";
-    throw s;
+    std::cout<<"No room (m or n == 0)\n";
   }
-  for (int j = 0; j < this->Rows; ++j) {
-    for (int i = 0; i < this->Columns; ++i) {
+  for (unsigned long long j = 0; j < this->Rows; ++j) {
+    for (unsigned long long i = 0; i < this->Columns; ++i) {
       if(i==j){
         this->arr[j][i] = 1;
       }else{
@@ -129,13 +108,13 @@ void Matrix::init(){
 }
 
 //Reverse of init in that the diangal is all 0 and everything else is 1s
-void Matrix::Reinit(){
+template<class DataType>
+void Matrix<DataType>::Reinit(){
   if(this->Rows == 0 || this->Columns == 0){
-    std::string s ="No room (m or n == 0)\n";
-    throw s;
+    std::cout<<"No room (m or n == 0)\n";
   }
-  for (int j = 0; j < this->Rows; ++j) {
-    for (int i = 0; i < this->Columns; ++i) {
+  for (unsigned long long j = 0; j < this->Rows; ++j) {
+    for (unsigned long long i = 0; i < this->Columns; ++i) {
       if(i!=j){
         this->arr[j][i] = 1;
       }else{
@@ -147,27 +126,26 @@ void Matrix::Reinit(){
 
 
 //sets all items in the matrix
-void Matrix::setMatrix(int x){
+template<class DataType>
+void Matrix<DataType>::setMatrix(DataType x){
   if(this->Rows == 0 || this->Columns == 0){
-    std::string s ="No room (m or n == 0)\n";
-    throw s;
+    std::cout<<"No room (m or n == 0)\n";
   }
-  for (int j = 0; j < this->Rows; ++j) {
-    for (int i = 0; i < this->Columns; ++i) {
+  for (unsigned long long j = 0; j < this->Rows; ++j) {
+    for (unsigned long long i = 0; i < this->Columns; ++i) {
 	     this->arr[j][i] = x;
     }
   }
 }
 
 //Makes athe give matrix have the top half of the array 0s
-void Matrix::setTriangleMatrix(){
+template<class DataType>
+void Matrix<DataType>::setTriangleMatrix(){
   if(this->Rows == 0 || this->Columns == 0){
-    std::string s ="No room (m or n == 0)\n";
-    throw s;
+    std::cout<<"No room (m or n == 0)\n";
   }
-  int counter=Columns-1;
-  for (int j = 0; j < this->Rows; ++j) {
-    for (int i = 0; i < this->Columns; ++i) {
+  for (unsigned long long j = 0; j < this->Rows; ++j) {
+    for (unsigned long long i = 0; i < this->Columns; ++i) {
       if(i==j || i>=j){
         this->arr[j][i] = 1;
       }else{
@@ -179,16 +157,18 @@ void Matrix::setTriangleMatrix(){
 
 
 //gives access to the arr[][]
-void Matrix::setMatrix(int i, int j, int data){
+template<class DataType>
+void Matrix<DataType>::setMatrix(int i, int j, DataType data){
   this->arr[i][j] = data;
 }
 
 
 //raises this matrix to a given n power
-Matrix Matrix::pow(int n){
+template<class DataType>
+Matrix<DataType> Matrix<DataType>::pow(int n){
   if(n==1)
     return *(this);
-  Matrix tmp = this->pow(n/2);
+  Matrix<DataType> tmp = this->pow(n/2);
   if(n%2 == 1){
     return tmp*tmp*(*this);
   }
@@ -196,16 +176,16 @@ Matrix Matrix::pow(int n){
 }
 
 //Add two matrixies together
-Matrix Matrix::operator+(Matrix B){
+template<class DataType>
+Matrix<DataType> Matrix<DataType>::operator+(Matrix<DataType> B){
   //Catches edge case that the two given matrixies are not the same size
   if( this->Rows!=B.getN() || this->Columns!=B.getM() ){
     std::string x = "The matrixes don't have the same size""The matrixes don't have the same size";
     throw x;
   }
-  Matrix rtn(this->Rows, this->Columns);
-  for(int i=0; i<this->Rows; i++){
-    for(int j=0; j<this->Columns; j++){
-      // rtn[i][j] = (this->arr[i][j] + B.arr[i][j]);
+  Matrix<DataType> rtn(this->Rows, this->Columns);
+  for(unsigned long long i=0; i<this->Rows; i++){
+    for(unsigned long long j=0; j<this->Columns; j++){
       rtn.arr[i][j] = (this->arr[i][j] + B.arr[i][j]);
     }
   }
@@ -213,16 +193,16 @@ Matrix Matrix::operator+(Matrix B){
 }
 
 //subtract matrix A from matrix B
-Matrix Matrix::operator-(Matrix B){
+template<class DataType>
+Matrix<DataType> Matrix<DataType>::operator-(Matrix<DataType> B){
   //Catches eadge case that the two given matrixies are not the same size
   if( this->Rows!=B.getN() || this->Columns!=B.getM() ){
     std::string x = "The matrixes don't have the same size";
     throw x;
   }
-  Matrix rtn(this->Rows, this->Columns);
-  for(int i=0; i<this->Rows; i++){
-    for(int j=0; j<this->Columns; j++){
-      // rtn[i][j] = (this->arr[i][j] + B.arr[i][j]);
+  Matrix<DataType> rtn(this->Rows, this->Columns);
+  for(unsigned long long i=0; i<this->Rows; i++){
+    for(unsigned long long j=0; j<this->Columns; j++){
       rtn.arr[i][j] = (this->arr[i][j] - B.arr[i][j]);
     }
   }
@@ -231,17 +211,18 @@ Matrix Matrix::operator-(Matrix B){
 }
 
 //Multiply Matrix A and B
-Matrix Matrix::operator*(Matrix B){
+template<class DataType>
+Matrix<DataType> Matrix<DataType>::operator*(Matrix<DataType> B){
   if( this->Columns != B.Rows ){
     std::string x = "The matrixes don't have the same size";
     throw x;
   }
-  Matrix rtn(this->Rows, B.Columns);
-  for(int both = 0; both < this->Rows; both++){
-    for(int i = 0; i < B.Columns; i++){
-      int sum=0;
-      for(int j = 0; j < this->Columns; j++){
-	        sum+= this->arr[both][j]*B.arr[j][i];
+  Matrix<DataType> rtn(this->Rows, B.Columns);
+  for(unsigned long long both = 0; both < this->Rows; both++){
+    for(unsigned long long i = 0; i < B.Columns; i++){
+      DataType sum=0;
+      for(unsigned long long j = 0; j < this->Columns; j++){
+	        sum += this->arr[both][j]*B.arr[j][i];
       }
       rtn.arr[both][i] = sum;
     }
@@ -250,15 +231,16 @@ Matrix Matrix::operator*(Matrix B){
 }
 
 //Multiply Matrix A by a scalor
-Matrix Matrix::operator*(int B){
+template<class DataType>
+Matrix<DataType> Matrix<DataType>::operator*(int B){
   //Catches edge case that the two given matrixies are not the same size
   if( this->Rows ==0 || this->Columns ==0 ){
     std::string x = "The matrixes don't have the same size";
     throw x;
   }
-  Matrix rtn(this->Rows, this->Columns);
-  for(int i=0; i<this->Rows; i++){
-    for(int j=0; j<this->Columns; j++){
+  Matrix<DataType> rtn(this->Rows, this->Columns);
+  for(unsigned long long i=0; i<this->Rows; i++){
+    for(unsigned long long j=0; j<this->Columns; j++){
       // rtn[i][j] = (this->arr[i][j] + B.arr[i][j]);
       rtn.arr[i][j] = (this->arr[i][j] * B);
     }
