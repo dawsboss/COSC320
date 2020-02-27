@@ -82,7 +82,7 @@ Matrix timeSub(Matrix A, Matrix B){
 int main(){
   Logger::init("Result");
 
-std::cout<<Fibinacci(6)<<std::endl;
+std::cout<<Fibinacci(7)<<std::endl;
 std::cout<<std::endl;
 
 
