@@ -1,3 +1,9 @@
+#Lab01
+##In this lab you will focus on the following objectives:
+###1. Review dynamic memory and array usage in c++
+###2. Explore empirical tests for program efficiency
+###3. Compare theoretical algorithm analysis with practical implementations of recursive and iterative sorting algorithms
+
 (a)  What is the theoretical time complexity of your sorting algorithms (best and worst case), in terms
   of the array size?
 (b)  How does the absolute timing scale with the number of elements in the array?  The size of the
