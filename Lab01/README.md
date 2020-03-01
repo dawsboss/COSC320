@@ -1,6 +1,6 @@
 ### Grant Dawson
 
-# Lab01
+# Lab01 : Bubble/Insertion/Selection Sorts and Applications
 ## In this lab you will focus on the following objectives:
  * 1. Review dynamic memory and array usage in c++
  * 2. Explore empirical tests for program efficiency
