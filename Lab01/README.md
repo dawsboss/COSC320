@@ -9,10 +9,10 @@
 ## Questions:
 ### a)  What is the theoretical time complexity of your sorting algorithms (best and worst case), in termsof the array size?
     BubbleSort -    worst: n^2
-		    best: n
+		        best: n
     InsertionSort - worst: n^2
                     best: n
-    SelectionSort - (n-1)
+    SelectionSort - Worst/Best: n^2
 
 ### (b)  How does the absolute timing scale with the number of elements in the array?  The size of the elements?  Can you use the data collected to rectify this with the theoretical time complexity?
       BubbleSort -    Worst: n^2 so if you increase n by 2 is will take 4 time as long
