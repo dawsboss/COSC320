@@ -1,10 +1,10 @@
 ### Grant Dawson
 
 # Lab01 : Bubble/Insertion/Selection Sorts and Applications
-## In this lab you will focus on the following objectives:
- * 1. Review dynamic memory and array usage in c++
- * 2. Explore empirical tests for program efficiency
- * 3. Compare theoretical algorithm analysis with practical implementations of recursive and iterative sorting algorithms
+### In this lab you will focus on the following objectives:
+ *  Review dynamic memory and array usage in c++
+ *  Explore empirical tests for program efficiency
+ *  Compare theoretical algorithm analysis with practical implementations of recursive and iterative sorting algorithms
 
 ## Questions:
 #### a)  What is the theoretical time complexity of your sorting algorithms (best and worst case), in termsof the array size?
