@@ -8,17 +8,17 @@
 
 ## Questions:
 ### a)  What is the theoretical time complexity of your sorting algorithms (best and worst case), in termsof the array size?
-    BubbleSort -    worst: n^2
-		        best: n
-    InsertionSort - worst: n^2
-                    best: n
+    BubbleSort -    Worst: n^2
+		        Best: n
+    InsertionSort - Worst: n^2
+                    Best: n
     SelectionSort - Worst/Best: n^2
 
 ### (b)  How does the absolute timing scale with the number of elements in the array?  The size of the elements?  Can you use the data collected to rectify this with the theoretical time complexity?
       BubbleSort -    Worst: n^2 so if you increase n by 2 is will take 4 time as long
-		      Best: n if you increase it by 2 then it will run for two times the time
+		          Best: n if you increase it by 2 then it will run for two times the time
       InsertionSort - Worst: n^2 if you increase the amount of numbers (2n) then it will take 4 times the amount of time
-		      Best: n if you increase the number of elements by 2 (2n) then it will take 2 times the times
+		          Best: n if you increase the number of elements by 2 (2n) then it will take 2 times the times
       SelectionSort - Best/Worst: if you increase the number of elements by 2 (2n) then it will take ((2n)-1) so it will take two times the time
 
 ### c)  Aggregate your data into a graph of the complexity for the various array sizes, for example witha spreadsheet program like LibreOffice Calc or Microsoft Word.
