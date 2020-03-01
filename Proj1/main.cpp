@@ -8,10 +8,10 @@ int Fib(Matrix<int> A, int n){
 //Finds the nth fibinacci number
 int Fibinacci(int n){
   Matrix<int> A(2,2);
-  A.setMatrix(0,0,0);
-  A.setMatrix(0,1,1);
-  A.setMatrix(1,0,1);
-  A.setMatrix(1,1,1);
+  A.setElement(0,0,0);
+  A.setElement(0,1,1);
+  A.setElement(1,0,1);
+  A.setElement(1,1,1);
   return Fib(A, n);
 }
 

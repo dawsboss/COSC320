@@ -158,7 +158,7 @@ void Matrix<DataType>::setTriangleMatrix(){
 
 //gives access to the arr[][]
 template<class DataType>
-void Matrix<DataType>::setMatrix(int i, int j, DataType data){
+void Matrix<DataType>::setElement(int i, int j, DataType data){
   this->arr[i][j] = data;
 }
 
