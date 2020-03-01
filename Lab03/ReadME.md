@@ -1,9 +1,15 @@
 ### Grant Dawson
 
-# Heap Sort and Appications
+# Lab03 : Heap Sort and Appications
+### In this lab you will focus on the following objectives:
+*  Develop familiarity with a Heap data structure and its theoretical properties
+*  Review array-based implementations of binary trees in c++
 
-NOTE: To test the prints they are in the buildHeap function and are just commented out
+NOTE: To test the prints they are in the buildHeap function and are just commented out.
+
 NOTE: These files are also setup to make there own text file (you pick the name in main in init) and will put all results to these files
+
+## Questions: 
 
 #### (a)  Summarize your approach to the problem, and how your code addresses the abstractions needed.
 * This program has 4 main functions. 2 of these main functions are designed to only build a max heap.
@@ -20,7 +26,10 @@ didn't mess up any other parent children relationships.
 
 #### (b)  What is the theoretical time complexity of your sorting algorithm (best and worst case), in terms of the array size?
 Best and worst case: O(n*log(n)), n-array size
+
 #### (c)  Test your sorting algorithm on different size and types of arrays, as you did with labs 1 and 2.Be sure to vary the parameters enough to use the observations to answer the next questions!
+In the code
+
 #### (d)  How does the absolute timing scale with the number of elements in the array?  The size of the elements?
 Use the data collected to rectify this with the theoretical time complexity, e.g.  what n on-asymptotic function of n mostly closely matches the timings that you observe as n grows?
     To visulize the relation between the times and swaps vs the number of elements in the array, I made an extra graph with the swap and time graphs that
@@ -29,6 +38,8 @@ Use the data collected to rectify this with the theoretical time complexity, e.g
 
 
 #### (e)  Aggregate your data into a graph of the complexity for the various array sizes, for example with a spreadsheet program like LibreOffice Calc or Microsoft Word.
+On other page...
+
 #### (f)  How does the sort perform in different cases?  What is the best and worst case, according to your own test results?
 The sorts preformed primially very similar no matter what case was given but I did notice that the decending arrays had less swaps done in them apposed to Accending and deccending arrays.
 
