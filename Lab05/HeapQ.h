@@ -2,6 +2,7 @@
 #define HEAPQ_H
 
 #include <iostream>
+#include <math.h> //log2()
 
 template<class T>
   struct HeapObj{
@@ -15,7 +16,7 @@ private:
   int length;
   int heapSize;
   HeapObj<T>* arr;
-  
+
   void IncreaseKey();
   void ExpandArray();
 
@@ -30,7 +31,7 @@ public:
   HeapObj<T> ExtractMax();
   HeapObj<T> Peek();
   void Insert(T, int);
-  void print();
+  void print(int,int);
 
 };
 

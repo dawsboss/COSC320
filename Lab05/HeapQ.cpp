@@ -85,6 +85,17 @@ void HeapQ<T>::Insert(T, int){
 
 //prints out whole queue
 template<class T>
-void HeapQ<T>::print(){
-
+void HeapQ<T>::print(int i, int d){
+  int startNode = i;
+  for(int w=0; w<d; w++){
+    for(int j=startNode; j < (startNode + exp2(w)); j++){
+      if(j <= this->heapSize){
+        std::cout<<arr[j]->data<<" ";
+      }else{
+        std::cout<<"* ";
+      }
+    }
+    std::cout<<std::endl;
+    startNode*=2;
+  }
 }
