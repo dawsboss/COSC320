@@ -86,10 +86,10 @@ T HeapQ<T>::ExtractMax(){
 
 //Looks at data at the top of a queue
 template<class T>
-HeapObj<T> HeapQ<T>::Peek(){
+T HeapQ<T>::Peek(){
   if(heapSize == 0)
     throw "Nothing in heap";
-  return arr[0];
+  return arr[1].data;
 }
 
 

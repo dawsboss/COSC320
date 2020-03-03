@@ -15,17 +15,10 @@ template<class T>
     int right(int i){
       return 2*i+1;
     }
-    int parrent(int i){
-      if(i==0)
-        return;//edge case
-      if(i%2==0)
-        return i/2;
-      return (i/2)+1;
-    }
 
     HeapObj(){
       data = {};
-      key = -1000000;//TODO make this -inf
+      key = -2147483648;//TODO make this -inf -2,147,483,648 is the biggest number tha an int can go to
     }
 
     HeapObj(T d, int k){
@@ -61,7 +54,7 @@ public:
   HeapQ& operator=(HeapQ);
 
   T ExtractMax();
-  HeapObj<T> Peek();
+  T Peek();
   void Insert(T, int);
   void print();
   void MaxHeapify(int);
