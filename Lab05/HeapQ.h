@@ -60,7 +60,6 @@ public:
   ~HeapQ();
   HeapQ& operator=(HeapQ);
 
-
   T ExtractMax();
   HeapObj<T> Peek();
   void Insert(T, int);

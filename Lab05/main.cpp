@@ -13,6 +13,7 @@ int main(){
   std::cout<<y<<std::endl;
   h.print();
 
+
   HeapQ<double> g;
   g.Insert(10, 10);
   g.Insert(11,5);

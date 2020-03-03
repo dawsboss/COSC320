@@ -8,7 +8,6 @@ void HeapQ<T>::IncreaseKey(int k){
     swap(this->arr[index], this->arr[index/2]);
     index = index/2;
   }
-
 }
 
 
