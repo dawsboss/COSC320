@@ -62,8 +62,11 @@ try{
   test.setElement(0,1,0);
   test.setElement(1,0,0);
   test.setElement(1,1,3);
-  test.Inverse();
-
+	test.print();
+  Matrix<double> testInv = test.Inverse();
+	//Matrix<double> Identity = testInv*test;
+	testInv.print();
+	//Identity.print();
 }catch(std::string s){
   std::cout<<s<<std::endl;
 }catch(...){

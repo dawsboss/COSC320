@@ -127,19 +127,19 @@ Matrix<DataType> _Inverse(Matrix<DataType> lad){
       // }
   for(int i=0; i<Rows; i++){
     for(int j=0; j<Columns; j++){
-      if(i>=0 && i<Rows/2 && j>=0 && j>Columns/2){
-        B.setElement(i,j,lad.getElement(i,j));
-      }else if(i>=Rows/2 && i<Rows && j>=0 && j<Columns/2){
-        C.setElement(i-Rows,j,lad.getElement(i,j));
-      }else if(i>=0 && i<Rows/2 && j>=Columns/2 && j>Columns){
-        CT.setElement(i,j-Columns,lad.getElement(i,j));
-      }else if(i>=Rows/2 && i<Rows && j>=Rows/2 && j<Columns){
-        D.setElement(i-Rows, j-Columns, lad.getElement(i,j));
-      }else{
-        std::cout<<"error overflow"<<std::endl;
-      }
-    }
-  }
+  		if(i<Rows/2 && j<Columns/2)//Top left
+				B.setElement( i, j, lad.getElement(i,j) );
+			else if(i>=Rows/2 && j<Columns/2)//Bottom left
+				C.setElement( i-(Rows/2), j, lad.getElement(i,j) );
+			else if(i<Rows/2 && j>=Columns/2)//Top right
+				CT.setElement( i, j-(Columns/2), lad.getElement(i,j) );
+			else if(i>=Rows/2 && j>=Columns/2)//bottom right
+				D.setElement( i-(Rows/2), j-(Columns/2), lad.getElement(i,j) );
+			else
+				std::cout<<"Overflow Splitting"<<std::endl;
+
+		}
+	}
 
 
   Matrix<DataType> BPrime = B.Inverse();
@@ -157,15 +157,18 @@ Matrix<DataType> _Inverse(Matrix<DataType> lad){
   Matrix<DataType> AInverse(Rows, Columns);
   for(int i=0; i<Rows; i++){
     for(int j=0; j<Columns; j++){
-      if(i>=0 && i<=Rows/2 && j>=0 && j<=Columns/2){//These if statements put the data from the this data into 4 seperate matrixies and the if statments put the data where it should go as it is seen
+      if(i<Rows/2 &&  j<Columns/2){//These if statements put the data from the this data into 4 seperate matrixies and the if statments put the data where it should go as it is seen
         AInverse.setElement(i,j,B.getElement(i,j));
-      }else if(i>=0 && i<=Rows/2 && j>=(Columns/2)+1 && j<=Columns){
-        AInverse.setElement(i,j-Columns,C.getElement(i,j));
-      }else if(i>=(Rows/2)+1 && i<=Rows && j>=0 && j<=Columns/2){//Should just be the transpose of C but heck we will do it
-        AInverse.setElement(i-Rows,j,CT.getElement(i,j));
-      }else if(i>=(Rows/2)+1 && i<=Rows && j>=(Columns/2)+1 && j<=Columns){
-        AInverse.setElement(i-Rows,j-Columns,D.getElement(i,j));
-      }
+      }else if(i>=Rows/2 && j<(Columns/2)){
+        AInverse.setElement(i, j, C.getElement(i-(Rows/2),j));
+      }else if(i<(Rows/2) && j>=Columns/2){//Should just be the transpose of C but heck we will do it
+        std::cout<<"I: "<<i<<" J:"<<j<<std::endl;
+				AInverse.setElement(i, j, CT.getElement(i,j-(Columns/2)));
+      }else if(i>=(Rows/2) && j>=(Columns/2)){
+        AInverse.setElement(i, j, D.getElement(i-(Rows/2),j-(Columns/2)));
+      }else{
+				std::cout<<"Overflow Filling"<<std::endl;
+			}
     }
   }
 
