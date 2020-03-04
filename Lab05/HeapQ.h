@@ -51,7 +51,7 @@ public:
   HeapQ();
   HeapQ(HeapQ&);
   ~HeapQ();
-  HeapQ& operator=(HeapQ);
+  HeapQ* operator=(HeapQ&);
 
   T ExtractMax();
   T Peek();

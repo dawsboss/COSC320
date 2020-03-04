@@ -12,13 +12,30 @@ void HeapQ<T>::IncreaseKey(int k){
 
 
 //Extends the array when needed
+
+// HeapObj<T>* newArr = new HeapObj<T>[arrLength * 2];
+// for (int i = 0; i < arrLength; i++) {
+//   newArr[i] = arr[i];
+// }
+// delete [] arr;
+// arr = newArr;
+// arrLength *= 2;
+
 template<class T>
 void HeapQ<T>::ExpandArray(){
+  // HeapObj<T>* newArr = new HeapObj<T>[length * 2];
+  // for (int i = 0; i < length; i++) {
+  //   newArr[i] = arr[i];
+  // }
+  // delete [] arr;
+  // arr = newArr;
+  // length *= 2;
   this->length *= 2;
   HeapObj<T>* newArr = new HeapObj<T>[this->length];
-  for(int i=0; i<heapSize; i++){
+  for(int i=0; i<heapSize+1; i++){
     newArr[i] = this->arr[i];
   }
+  delete [] this->arr;
   this->arr = newArr;
 }
 
@@ -33,8 +50,8 @@ void HeapQ<T>::swap(HeapObj<T>& x, HeapObj<T>& y){
 //Defualt constructor
 template<class T>
 HeapQ<T>::HeapQ(){
-  this->arr = new HeapObj<T>[100];
-  this->length = 100;
+  this->arr = new HeapObj<T>[3];
+  this->length = 3;
   this->heapSize = 0;
 }
 
@@ -60,7 +77,10 @@ HeapQ<T>::~HeapQ(){
 
 //= operator
 template<class T>
-HeapQ<T>& HeapQ<T>::operator=(HeapQ B){
+HeapQ<T>* HeapQ<T>::operator=(HeapQ& B){
+  if((this) == &B){
+    return (this);
+  }
   if(length > 0){
     delete [] arr;
   }
@@ -70,6 +90,7 @@ HeapQ<T>& HeapQ<T>::operator=(HeapQ B){
    for(int i=0; i < this->length; i++){
      this->arr[i] = B.arr[i];
   }
+  return this;
 }
 
 
@@ -96,10 +117,10 @@ T HeapQ<T>::Peek(){
 //Inserts a new array location
 template<class T>
 void HeapQ<T>::Insert(T d, int k){
-  HeapObj<T> newObj;// = new HeapObj<T>();
-  newObj.key = k-1;
-  newObj.data = d;
-  if(heapSize == length)
+  HeapObj<T> newObj(d,k-1);// = new HeapObj<T>();
+  // newObj.key = k-1;
+  // newObj.data = d;
+  if(heapSize+1 == length)
     ExpandArray();
   arr[++this->heapSize] = newObj; // relies on T::operator=
   IncreaseKey(k);
