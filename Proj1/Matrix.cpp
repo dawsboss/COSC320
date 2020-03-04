@@ -74,6 +74,11 @@ DataType Matrix<DataType>::getElement(unsigned long long i, unsigned long long j
       return this->arr[i][j];
 }
 
+template<class T>
+void Matrix<T>::setElement(int i, int j, T data){
+  this->arr[i][j] = data;
+}  //gives access to the arr[rows][column]
+
 
 //prints the matrix just like it wouls appear as a matrix
 template<class DataType>
@@ -155,12 +160,6 @@ void Matrix<DataType>::setTriangleMatrix(){
   }
 }
 
-
-//gives access to the arr[][]
-template<class DataType>
-void Matrix<DataType>::setElement(int i, int j, DataType data){
-  this->arr[i][j] = data;
-}
 
 
 //raises this matrix to a given n power

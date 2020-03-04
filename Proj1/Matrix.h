@@ -2,6 +2,7 @@
 #define MATRIX_H
 
 #include <iostream>
+#include <math.h>
 // #include "Logger.h"
 template <class DataType>
 class Matrix{
@@ -9,6 +10,19 @@ private:
   DataType** arr;//Matrix
   unsigned long long Rows;//n
   unsigned long long Columns;//m
+  bool isSymetric(){
+    for(int i=0; i<Rows; i++){
+      for(int j=0; j<Columns; j++){
+        if(this->arr[i][j]!=this->arr[j][i]){
+          return false;
+        }
+      }
+    }
+    return true;
+  }
+  Matrix<DataType> pad(Matrix<DataType> oldMatrix, int k){//k being the number of needed rows/Columns
+    Matrix<DataType> newMatrix();
+  }
 
 public:
   //Lab04:
@@ -42,59 +56,98 @@ public:
   //Extra Credit add a multiply operator that allows to mulitply by scalors
   Matrix operator*(int B);
 
+  //TODO: New for proj1
+  Matrix<DataType> transpose(){
+    int i, k;
+    Matrix<DataType> rtn(this->Columns, this->Rows);
+    for(i = 0; i < this->Rows; i++)
+      for(k = 0; k < this->Columns; k++)
+        rtn.setElement( k, i, this->getElement(i, k));
+
+    return rtn;
+  }
 
 
+Matrix<DataType> Inverse(){
+  Matrix<DataType> Temp = *this;
+  if( this->Rows != this->Columns)
+    throw "Matrix not square!";
+  if(!isSymetric())
+    throw "Matrix not symetric";
+  if(log2(Rows) - (int)log2(Rows) !=0){
+    Temp = pad(*this, log2(Rows) - (int)log2(Rows));
+    Matrix<DataType> rtn(Rows,Columns);
+    for(int i=0;i<Rows;i++){
+      for(int j=0;j<Columns;j++){
+        rtn.setElement(i,j,Temp.getElement(i,j));
+      }
+    }
+    return rtn;
+  }
+  if(log2(Rows) - (int)log2(Rows) == 0)
+    return this->_Inverse(Temp);
 
-
-
-
-
-
-
-
-
-//TODO: New for proj1
-void transposeMatixS(Matrix<DataType> *A, Matrix<DataType> *F){
-  int i, k;
-  for(i = 0; i < A -> rows; i++)
-    for(k = 0; k < A -> cols; k++)
-      F.setElement( k, i, A.getElement(i, k));
 }
 
-
-
-
-Matrix<DataType>& Inverse(){
-  //TODO Edge cases
-
+Matrix<DataType> _Inverse(Matrix<DataType> lad){
+  //Assumes edge cases are statments
+  //Private Inverse edition
+  if(lad.Rows <= 1){
+    Matrix<DataType> rtn(1,1);
+    rtn.arr[0][0]=1.0/lad.getElement(0,0);
+    return rtn;
+  }
 
   Matrix<DataType> B(Rows/2, Columns/2);
   Matrix<DataType> C(Rows/2, Columns/2);
   Matrix<DataType> D(Rows/2, Columns/2);
   Matrix<DataType> CT(Rows/2, Columns/2);
 
+  // for(int i=0; i<Rows; i++){
+  //   for(int j=0; j<Columns; j++){
+      // std::cout<<"Indexers: i:"<<i<<" j:"<<j<<std::endl;
+      // if(i>=0 && i<Rows/2 && j>=0 && j<Columns/2){//These if statements put the data from the this data into 4 seperate matrixies and the if statments put the data where it should go as it is seen
+      //   std::cout<<"B: Indexers: i:"<<i<<" j:"<<j<<std::endl;
+      //   std::cout<<getElement(i,j)<<std::endl;
+      //   B.setElement(i,j,lad.getElement(i,j));
+      // }else if(i>=0 && i<Rows/2 && j>=(Columns/2) && j<Columns){
+      //   std::cout<<"C: Indexers: i:"<<i<<" j:"<<j<<std::endl;
+      //   std::cout<<getElement(i,j)<<std::endl;
+      //   CT.setElement(i,j-(Columns),lad.getElement(i,j));
+      // }else if(i>=(Rows/2) && i<Rows && j>=0 && j<Columns/2){//Should just be the transpose of C but heck we will do it
+      //   std::cout<<"CT: Indexers: i:"<<i<<" j:"<<j<<std::endl;
+      //   std::cout<<getElement(i,j)<<std::endl;
+      //   C.setElement(i-(Rows),j,lad.getElement(i,j));
+      // }else if(i>=(Rows/2) && i<Rows && j>=(Columns/2) && j<Columns){
+      //   std::cout<<"D: Indexers: i:"<<i<<" j:"<<j<<std::endl;
+      //   std::cout<<getElement(i,j)<<std::endl;
+      //   D.setElement(i-(Rows),j-(Columns),lad.getElement(i,j));
+      // }else{
+      //   std::cout<<"error overflow"<<std::endl;
+      // }
   for(int i=0; i<Rows; i++){
     for(int j=0; j<Columns; j++){
-      if(i>=0 && i<=Rows/2 && j>=0 && j<=Columns/2){//These if statements put the data from the this data into 4 seperate matrixies and the if statments put the data where it should go as it is seen
-        B.setElement(i,j,this->arr[i][j]);
-      }else if(i>=0 && i<=Rows/2 && j>=(Columns/2)+1 && j<=Columns){
-        C.setElement(i,j,this->arr[i][j]);
-      }else if(i>=(Rows/2)+1 && i<=Rows && j>=0 && j<=Columns/2){//Should just be the transpose of C but heck we will do it
-        CT.setElement(i,j,this->arr[i][j]);
-      }else if(i>=(Rows/2)+1 && i<=Rows && j>=(Columns/2)+1 && j<=Columns){
-        D.setElement(i,j,this->arr[i][j]);
+      if(i>=0 && i<Rows/2 && j>=0 && j>Columns/2){
+        B.setElement(i,j,lad.getElement(i,j));
+      }else if(i>=Rows/2 && i<Rows && j>=0 && j<Columns/2){
+        C.setElement(i-Rows,j,lad.getElement(i,j));
+      }else if(i>=0 && i<Rows/2 && j>=Columns/2 && j>Columns){
+        CT.setElement(i,j-Columns,lad.getElement(i,j));
+      }else if(i>=Rows/2 && i<Rows && j>=Rows/2 && j<Columns){
+        D.setElement(i-Rows, j-Columns, lad.getElement(i,j));
+      }else{
+        std::cout<<"error overflow"<<std::endl;
       }
-      std::cout<<"error overflow"<<std::endl;
     }
   }
 
 
-  Matrix<DataType> BPrime = B.inverse();
+  Matrix<DataType> BPrime = B.Inverse();
   Matrix<DataType> W = C*BPrime;
   Matrix<DataType> WT = W.transpose();
   Matrix<DataType> X = W*CT;
   Matrix<DataType> S = D-X;
-  Matrix<DataType> V = S.inverse();
+  Matrix<DataType> V = S.Inverse();
   Matrix<DataType> Y = V*W;
   Matrix<DataType> YT = Y.transpose();
   Matrix<DataType> T = YT*(-1);
@@ -107,11 +160,11 @@ Matrix<DataType>& Inverse(){
       if(i>=0 && i<=Rows/2 && j>=0 && j<=Columns/2){//These if statements put the data from the this data into 4 seperate matrixies and the if statments put the data where it should go as it is seen
         AInverse.setElement(i,j,B.getElement(i,j));
       }else if(i>=0 && i<=Rows/2 && j>=(Columns/2)+1 && j<=Columns){
-        AInverse.setElement(i,j,C.getElement(i,j));
+        AInverse.setElement(i,j-Columns,C.getElement(i,j));
       }else if(i>=(Rows/2)+1 && i<=Rows && j>=0 && j<=Columns/2){//Should just be the transpose of C but heck we will do it
-        AInverse.setElement(i,j,CT.getElement(i,j));
+        AInverse.setElement(i-Rows,j,CT.getElement(i,j));
       }else if(i>=(Rows/2)+1 && i<=Rows && j>=(Columns/2)+1 && j<=Columns){
-        AInverse.setElement(i,j,D.getElement(i,j));
+        AInverse.setElement(i-Rows,j-Columns,D.getElement(i,j));
       }
     }
   }

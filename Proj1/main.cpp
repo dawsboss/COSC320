@@ -1,24 +1,6 @@
 #include "Matrix.cpp"
 
-//Does the actual work form the wrapper
-int Fib(Matrix<int> A, int n){
-  return A.pow(n).getElement(1,1);
-}
-
-//Finds the nth fibinacci number
-int Fibinacci(int n){
-  Matrix<int> A(2,2);
-  A.setElement(0,0,0);
-  A.setElement(0,1,1);
-  A.setElement(1,0,1);
-  A.setElement(1,1,1);
-  return Fib(A, n);
-}
-
-
-
-
-
+//Does the actual work form the wrapperW
 
 int main(){
   // Matrix B(4, 4);
@@ -39,7 +21,6 @@ int main(){
 
 
 
-std::cout<<Fibinacci(4)<<std::endl;
 
 try{
   //initilizations
@@ -76,7 +57,12 @@ try{
   std::cout<<"Diagnal 0s * 2: \n";
   (reinit * 2).print();
 
-
+  Matrix<double> test(2,2);
+  test.setElement(0,0,2);
+  test.setElement(0,1,0);
+  test.setElement(1,0,0);
+  test.setElement(1,1,3);
+  test.Inverse();
 
 }catch(std::string s){
   std::cout<<s<<std::endl;
