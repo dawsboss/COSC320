@@ -1,0 +1,11 @@
+10 applicants cost (1-Interview/2-Hire): 15
+10 applicants cost (1-Interview/2-Hire): 13
+10 applicants cost (1-Interview/2-Hire): 13
+10 applicants cost (1-Interview/2-Hire): 11
+10 applicants cost (1-Interview/2-Hire): 15
+10 applicants cost (1-Interview/2-Hire): 15
+10 applicants cost (1-Interview/2-Hire): 17
+10 applicants cost (1-Interview/2-Hire): 13
+10 applicants cost (1-Interview/2-Hire): 17
+10 applicants cost (1-Interview/2-Hire): 21
+Avg: 15
