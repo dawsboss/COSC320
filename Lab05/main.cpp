@@ -8,8 +8,8 @@ int main(){
   HeapQ<std::string> h;
   h.Insert("Grant", 10);
   h.Insert("Alice", 1);
-  // h.Insert("Bob", 11);
-  //h.Insert("Jeff", 2);
+  h.Insert("Bob", 11);
+  h.Insert("Jeff", 2);
   y = h.Peek();
   std::cout<<"Peeked:"<<y<<std::endl;
   h.print();

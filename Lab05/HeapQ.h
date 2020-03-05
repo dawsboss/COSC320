@@ -15,10 +15,15 @@ template<class T>
     int right(int i){
       return 2*i+1;
     }
+    int parrent(int i){
+      if(floor(i/2) == i/2)
+        return i/2;
+      return i;
+    }
 
     HeapObj(){
       data = {};
-      key = -2147483648;//TODO make this -inf -2,147,483,648 is the biggest number tha an int can go to
+      key = -2147483648;//this is -inf -2,147,483,648 is the biggest number tha an int can go to
     }
 
     HeapObj(T d, int k){

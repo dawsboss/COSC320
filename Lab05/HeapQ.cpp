@@ -1,3 +1,6 @@
+
+
+//Takes the element at the bottom and gives it the new value of k for it's key and pushes it up the heap // This will need another version to say which element you want to change in the future for implementation
 template<class T>
 void HeapQ<T>::IncreaseKey(int k){
   if(k < this->arr[heapSize].key)
@@ -10,26 +13,9 @@ void HeapQ<T>::IncreaseKey(int k){
   }
 }
 
-
-//Extends the array when needed
-
-// HeapObj<T>* newArr = new HeapObj<T>[arrLength * 2];
-// for (int i = 0; i < arrLength; i++) {
-//   newArr[i] = arr[i];
-// }
-// delete [] arr;
-// arr = newArr;
-// arrLength *= 2;
-
+//Extends the array by 2 times it
 template<class T>
 void HeapQ<T>::ExpandArray(){
-  // HeapObj<T>* newArr = new HeapObj<T>[length * 2];
-  // for (int i = 0; i < length; i++) {
-  //   newArr[i] = arr[i];
-  // }
-  // delete [] arr;
-  // arr = newArr;
-  // length *= 2;
   this->length *= 2;
   HeapObj<T>* newArr = new HeapObj<T>[this->length];
   for(int i=0; i<heapSize+1; i++){
@@ -124,7 +110,6 @@ void HeapQ<T>::Insert(T d, int k){
     ExpandArray();
   arr[++this->heapSize] = newObj; // relies on T::operator=
   IncreaseKey(k);
-
 }
 
 
