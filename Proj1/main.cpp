@@ -64,9 +64,31 @@ try{
   test.setElement(1,1,3);
 	test.print();
   Matrix<double> testInv = test.Inverse();
-	//Matrix<double> Identity = testInv*test;
+	Matrix<double> Identity = testInv*test;
 	testInv.print();
-	//Identity.print();
+	Identity.print();
+  
+
+  
+  Matrix<double> test1(3,3);
+  test1.setElement(0,0,14);
+  test1.setElement(0,1,7);
+  test1.setElement(0,2,4);
+  test1.setElement(1,0,7);
+  test1.setElement(1,1,10);
+  test1.setElement(1,2,1);
+  test1.setElement(2,0,4);
+  test1.setElement(2,1,1);
+  test1.setElement(2,2,2);
+
+
+
+	test1.print();
+  testInv = test1.Inverse();
+	Identity = testInv*test1;
+	testInv.print();
+	Identity.print();
+
 }catch(std::string s){
   std::cout<<s<<std::endl;
 }catch(...){

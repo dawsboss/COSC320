@@ -22,6 +22,7 @@ private:
   }
   Matrix<DataType> pad(Matrix<DataType> oldMatrix, int k){//k being the number of needed rows/Columns
     Matrix<DataType> newMatrix();
+
   }
 
 public:
@@ -76,12 +77,14 @@ Matrix<DataType> Inverse(){
     throw "Matrix not symetric";
   if(log2(Rows) - (int)log2(Rows) !=0){
     Temp = pad(*this, log2(Rows) - (int)log2(Rows));
+    Temp.print();
     Matrix<DataType> rtn(Rows,Columns);
-    for(int i=0;i<Rows;i++){
-      for(int j=0;j<Columns;j++){
+    for(int i=0;i<Temp.Rows;i++){
+      for(int j=0;j<Temp.Columns;j++){
         rtn.setElement(i,j,Temp.getElement(i,j));
       }
     }
+    rtn.print();
     return rtn;
   }
   if(log2(Rows) - (int)log2(Rows) == 0)
@@ -158,20 +161,20 @@ Matrix<DataType> _Inverse(Matrix<DataType> lad){
   for(int i=0; i<Rows; i++){
     for(int j=0; j<Columns; j++){
       if(i<Rows/2 &&  j<Columns/2){//These if statements put the data from the this data into 4 seperate matrixies and the if statments put the data where it should go as it is seen
-        AInverse.setElement(i,j,B.getElement(i,j));
+        AInverse.setElement(i,j,R.getElement(i,j));
       }else if(i>=Rows/2 && j<(Columns/2)){
-        AInverse.setElement(i, j, C.getElement(i-(Rows/2),j));
+        AInverse.setElement(i, j, U.getElement(i-(Rows/2),j));
       }else if(i<(Rows/2) && j>=Columns/2){//Should just be the transpose of C but heck we will do it
         std::cout<<"I: "<<i<<" J:"<<j<<std::endl;
-				AInverse.setElement(i, j, CT.getElement(i,j-(Columns/2)));
+				AInverse.setElement(i, j, T.getElement(i,j-(Columns/2)));
       }else if(i>=(Rows/2) && j>=(Columns/2)){
-        AInverse.setElement(i, j, D.getElement(i-(Rows/2),j-(Columns/2)));
+        AInverse.setElement(i, j, V.getElement(i-(Rows/2),j-(Columns/2)));
       }else{
 				std::cout<<"Overflow Filling"<<std::endl;
 			}
     }
   }
-
+  return AInverse;
 }
 
 
