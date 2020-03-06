@@ -16,18 +16,34 @@ int main(){
   for(int i=0; i<10;i++){
     std::cout<<canadates[i]<<" ";
   }
+
+
+
+
+  int sizes[] = {10, 20, 30, 40, 50, 60, 70, 80, 90, 100, 150, 200, 250, 300, 350, 400, 450, 500};
+  int size = 18;
   std::cout<<std::endl;
   int sum = 0;
-  for(int i=0; i<10; i++){
-    int cost = hireAlgorithm(canadates, 10);
-    shuffle(canadates, 10);
-    std::cout<<"10 applicants cost (1-Interview/2-Hire): "<<cost<<std::endl;
-    Logger::logln("10 applicants cost (1-Interview/2-Hire): " + std::to_string(cost));
-    sum += cost;
+  for(int j=0; j<size; j++){
+    for(int i=0; i<sizes[j]; i++){
+      int cost = hireAlgorithm(canadates, 10);
+      shuffle(canadates, 10);
+      //std::cout<<"10 applicants # of hires: "<<cost<<std::endl;
+      //Logger::logln("10 applicants # of hires: " + std::to_string(cost));
+      sum += cost;
+    }
+    int avg = sum/sizes[j];
+    Logger::logln("Avg "+std::to_string(sizes[j])+" # of emplyees: "+std::to_string(avg));
+    std::cout<<"Average "<<sizes[j]<<": "<<avg<<" # of hires"<<std::endl;
   }
-  int avg = sum/10;
-  Logger::logln("Avg: "+std::to_string(avg));
-  std::cout<<"Average: "<<avg<<std::endl;
+  
+  
+  
+  
+  
+  
+  
+  
   delete [] canadates;
 
 
@@ -39,8 +55,7 @@ int main(){
 
 void shuffle(int* oldArr, int len){
   int rand1;
-  int rand2;
-  int size = {10};
+  int rand2; 
   for(int i = 0; i<(len*len)*len; i++){
     rand2 = (int)rand() % len;
     rand1 = (int)rand() % len;
@@ -62,6 +77,7 @@ int* makeCanadates(int len){
   return rtn;
 }
 
+//Runs our hiring algorthim but counts how many hires there were for the given array
 int hireAlgorithm(int* arr, int len){
   int cost;
   int largest=0;//Makes dummy hire
@@ -69,9 +85,9 @@ int hireAlgorithm(int* arr, int len){
   for(int i=1; i<len; i++){
     if(arr[i] > arr[largest]){
       largest = i;//Hire
-      cost += 2;
+      cost += 1;
     }
-    cost+=1;//Interview cost
+   // cost+=1;//Interview cost
   }
   return cost;
 }
