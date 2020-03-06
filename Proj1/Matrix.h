@@ -82,14 +82,19 @@ Matrix<DataType> Inverse(){
   if( this->Rows != this->Columns)
     throw "Matrix not square!";
   if(!isSymetric())
-    throw "Matrix not symetric";
+    std::cout<<"Matrix not symetric"<<std::endl;
+    Matrix<DataType> rtn = *this * this->transpose();
+    rtn._Inverse();
+    return rtn * this->transpose();   
   if(log2(Rows) - (int)log2(Rows) !=0){
+    std::cout<<"Matrix not padded and needs it"<<std::endl;
     Temp = pad(exp2((int)log2(Rows)+1)-Rows);
     std::cout<<"Test : Inverse() : Temp"<<std::endl;
     Temp.print();
+    Temp = Temp._Inverse();
     Matrix<DataType> rtn(Rows,Columns);
-    for(int i=0;i<Temp.Rows;i++){
-      for(int j=0;j<Temp.Columns;j++){
+    for(int i=0;i<Rows;i++){
+      for(int j=0;j<Columns;j++){
         rtn.setElement(i,j,Temp.getElement(i,j));
       }
     }
@@ -98,16 +103,16 @@ Matrix<DataType> Inverse(){
     return rtn;
   }
   if(log2(Rows) - (int)log2(Rows) == 0)
-    return this->_Inverse(Temp);
+    return Temp._Inverse();
 
 }
 
-Matrix<DataType> _Inverse(Matrix<DataType> lad){
+Matrix<DataType> _Inverse(){
   //Assumes edge cases are statments
   //Private Inverse edition
-  if(lad.Rows <= 1){
+  if(this->Rows <= 1){
     Matrix<DataType> rtn(1,1);
-    rtn.arr[0][0]=1.0/lad.getElement(0,0);
+    rtn.arr[0][0]=1.0/this->arr[0][0];
     return rtn;
   }
 
@@ -141,13 +146,13 @@ Matrix<DataType> _Inverse(Matrix<DataType> lad){
   for(int i=0; i<Rows; i++){
     for(int j=0; j<Columns; j++){
   		if(i<Rows/2 && j<Columns/2)//Top left
-				B.setElement( i, j, lad.getElement(i,j) );
+				B.setElement( i, j, this->arr[i][j] );
 			else if(i>=Rows/2 && j<Columns/2)//Bottom left
-				C.setElement( i-(Rows/2), j, lad.getElement(i,j) );
+				C.setElement( i-(Rows/2), j, this->arr[i][j] );
 			else if(i<Rows/2 && j>=Columns/2)//Top right
-				CT.setElement( i, j-(Columns/2), lad.getElement(i,j) );
+				CT.setElement( i, j-(Columns/2), this->arr[i][j] );
 			else if(i>=Rows/2 && j>=Columns/2)//bottom right
-				D.setElement( i-(Rows/2), j-(Columns/2), lad.getElement(i,j) );
+				D.setElement( i-(Rows/2), j-(Columns/2), this->arr[i][j] );
 			else
 				std::cout<<"Overflow Splitting"<<std::endl;
 
