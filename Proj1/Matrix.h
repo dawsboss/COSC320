@@ -20,9 +20,17 @@ private:
     }
     return true;
   }
-  Matrix<DataType> pad(Matrix<DataType> oldMatrix, int k){//k being the number of needed rows/Columns
-    Matrix<DataType> newMatrix();
-
+  Matrix<DataType> pad(int k){//k being the number of needed rows/Columns
+    int RowColumn = (int)this->Rows+k;
+    Matrix<DataType> newMatrix(RowColumn, RowColumn);
+    newMatrix.init();
+    
+    for(int i=0; i<this->Rows; i++){
+      for(int j=0; j<this->Columns; j++){
+        newMatrix.arr[i][j] = this->arr[i][j];
+      }
+    } 
+    return newMatrix;
   }
 
 public:
@@ -76,7 +84,8 @@ Matrix<DataType> Inverse(){
   if(!isSymetric())
     throw "Matrix not symetric";
   if(log2(Rows) - (int)log2(Rows) !=0){
-    Temp = pad(*this, log2(Rows) - (int)log2(Rows));
+    Temp = pad(exp2((int)log2(Rows)+1)-Rows);
+    std::cout<<"Test : Inverse() : Temp"<<std::endl;
     Temp.print();
     Matrix<DataType> rtn(Rows,Columns);
     for(int i=0;i<Temp.Rows;i++){
@@ -84,6 +93,7 @@ Matrix<DataType> Inverse(){
         rtn.setElement(i,j,Temp.getElement(i,j));
       }
     }
+    std::cout<<"Test : Inverse() : rtn"<<std::endl;
     rtn.print();
     return rtn;
   }
