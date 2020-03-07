@@ -10,10 +10,13 @@ private:
   DataType** arr;//Matrix
   unsigned long long Rows;//n
   unsigned long long Columns;//m
+
   bool isSymetric(){
+    Matrix<DataType> A = *this;
+    Matrix<DataType> AT = A.transpose();
     for(int i=0; i<Rows; i++){
       for(int j=0; j<Columns; j++){
-        if(this->arr[i][j]!=this->arr[j][i]){
+        if(A.arr[i][j]!=AT.arr[i][j]){
           return false;
         }
       }
@@ -24,12 +27,12 @@ private:
     int RowColumn = (int)this->Rows+k;
     Matrix<DataType> newMatrix(RowColumn, RowColumn);
     newMatrix.init();
-    
+
     for(int i=0; i<this->Rows; i++){
       for(int j=0; j<this->Columns; j++){
         newMatrix.arr[i][j] = this->arr[i][j];
       }
-    } 
+    }
     return newMatrix;
   }
 
@@ -81,16 +84,11 @@ Matrix<DataType> Inverse(){
   Matrix<DataType> Temp = *this;
   if( this->Rows != this->Columns)
     throw "Matrix not square!";
-  if(!isSymetric())
-    std::cout<<"Matrix not symetric"<<std::endl;
-    Matrix<DataType> rtn = *this * this->transpose();
-    rtn._Inverse();
-    return rtn * this->transpose();   
   if(log2(Rows) - (int)log2(Rows) !=0){
     std::cout<<"Matrix not padded and needs it"<<std::endl;
     Temp = pad(exp2((int)log2(Rows)+1)-Rows);
-    std::cout<<"Test : Inverse() : Temp"<<std::endl;
-    Temp.print();
+    // std::cout<<"Test : Inverse() : Temp"<<std::endl;
+    // Temp.print();
     Temp = Temp._Inverse();
     Matrix<DataType> rtn(Rows,Columns);
     for(int i=0;i<Rows;i++){
@@ -98,9 +96,32 @@ Matrix<DataType> Inverse(){
         rtn.setElement(i,j,Temp.getElement(i,j));
       }
     }
-    std::cout<<"Test : Inverse() : rtn"<<std::endl;
-    rtn.print();
+    // std::cout<<"Test : Inverse() : rtn"<<std::endl;
+    // rtn.print();
     return rtn;
+  }
+
+  if(!isSymetric()){
+    // std::cout<<"Matrix not symetric"<<std::endl;
+    // Matrix<DataType> rtn = *this * this->transpose();
+    // rtn._Inverse();
+    // return rtn * this->transpose();
+
+    std::cout << "Tmp is not symmetric right now " << std::endl;
+    this->print();
+    Matrix<DataType>tmpT = this->transpose();
+    std::cout << "Tmp 2 is tmp transpose" << std::endl;
+    tmpT.print();
+    Matrix<DataType> tmp3 = tmpT * *this;
+    std::cout << "tmp3 is (Symetric): " << std::endl;
+    tmp3.print();
+    std::cout << "What is happening here? " << std::endl;
+    (tmp3.Inverse()).print();
+    (tmp3.Inverse() * tmp3).print();
+    Matrix<DataType> tmp4 = tmp3.Inverse() * tmpT;
+    std::cout << "Now Inverse!" << std::endl;
+    tmp4.print();
+    return tmp4;
   }
   if(log2(Rows) - (int)log2(Rows) == 0)
     return Temp._Inverse();
@@ -146,7 +167,7 @@ Matrix<DataType> _Inverse(){
   for(int i=0; i<Rows; i++){
     for(int j=0; j<Columns; j++){
   		if(i<Rows/2 && j<Columns/2)//Top left
-				B.setElement( i, j, this->arr[i][j] );
+				B.setElement( i, j, this->getElement(i,j)/*this->arr[i][j]*/ );
 			else if(i>=Rows/2 && j<Columns/2)//Bottom left
 				C.setElement( i-(Rows/2), j, this->arr[i][j] );
 			else if(i<Rows/2 && j>=Columns/2)//Top right
@@ -173,6 +194,22 @@ Matrix<DataType> _Inverse(){
   Matrix<DataType> Z = WT*Y;
   Matrix<DataType> R = BPrime+Z;
   Matrix<DataType> AInverse(Rows, Columns);
+
+
+  // Matrix<DataType> Binv = B._Inverse(); //recursion
+  // Matrix<DataType> W = C * Binv;
+  // Matrix<DataType> Wt = W.transpose(); //could also compute with Binv * CT, but I think this is faster
+  // Matrix<DataType> X = W * CT;
+  // Matrix<DataType> S = D - X;
+  // Matrix<DataType> V = S._Inverse(); //recursion
+  // Matrix<DataType> Y = V * W;
+  // Matrix<DataType> Yt = Y.transpose();
+  // Matrix<DataType> L/*T*/ = Yt * -1; //T is the template class name
+  // Matrix<DataType> U = Y * -1;
+  // Matrix<DataType> Z = Wt * Y;
+  // Matrix<DataType> R = Binv + Z;
+
+
   for(int i=0; i<Rows; i++){
     for(int j=0; j<Columns; j++){
       if(i<Rows/2 &&  j<Columns/2){//These if statements put the data from the this data into 4 seperate matrixies and the if statments put the data where it should go as it is seen
