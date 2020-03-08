@@ -1,9 +1,9 @@
 Avg 10 # of emplyees: 4
 Avg 20 # of emplyees: 6
 Avg 30 # of emplyees: 8
-Avg 40 # of emplyees: 10
-Avg 50 # of emplyees: 12
-Avg 60 # of emplyees: 14
+Avg 40 # of emplyees: 9
+Avg 50 # of emplyees: 11
+Avg 60 # of emplyees: 13
 Avg 70 # of emplyees: 15
 Avg 80 # of emplyees: 17
 Avg 90 # of emplyees: 19
@@ -16,3 +16,189 @@ Avg 350 # of emplyees: 20
 Avg 400 # of emplyees: 21
 Avg 450 # of emplyees: 23
 Avg 500 # of emplyees: 24
+Avg 1000 # of emplyees: 16
+Avg 1500 # of emplyees: 14
+Avg 2000 # of emplyees: 15
+Avg 2500 # of emplyees: 16
+Avg 3000 # of emplyees: 17
+Avg 3500 # of emplyees: 18
+Avg 4000 # of emplyees: 20
+Avg 4500 # of emplyees: 22
+Avg 5000 # of emplyees: 23
+ 
+MergeSort: Avg # of hires for 10000: 267232
+ Time: 0.003063
+MergeSort: Avg # of hires for 60000: 1908928
+ Time: 0.013699
+MergeSort: Avg # of hires for 110000: 3697856
+ Time: 0.021493
+MergeSort: Avg # of hires for 160000: 5555712
+ Time: 0.027000
+MergeSort: Avg # of hires for 210000: 7455712
+ Time: 0.036236
+MergeSort: Avg # of hires for 260000: 9355712
+ Time: 0.044751
+MergeSort: Avg # of hires for 310000: 11351424
+ Time: 0.054042
+MergeSort: Avg # of hires for 360000: 13351424
+ Time: 0.063240
+MergeSort: Avg # of hires for 410000: 15351424
+ Time: 0.072524
+MergeSort: Avg # of hires for 460000: 17351424
+ Time: 0.081371
+MergeSort: Avg # of hires for 510000: 19351424
+ Time: 0.090747
+MergeSort: Avg # of hires for 560000: 21422848
+ Time: 0.100987
+MergeSort: Avg # of hires for 610000: 23522848
+ Time: 0.109978
+MergeSort: Avg # of hires for 660000: 25622848
+ Time: 0.119087
+MergeSort: Avg # of hires for 710000: 27722848
+ Time: 0.128895
+MergeSort: Avg # of hires for 760000: 29822848
+ Time: 0.137927
+MergeSort: Avg # of hires for 810000: 31922848
+ Time: 0.147540
+MergeSort: Avg # of hires for 860000: 34022848
+ Time: 0.158231
+MergeSort: Avg # of hires for 910000: 36122848
+ Time: 0.166439
+MergeSort: Avg # of hires for 960000: 38222848
+ Time: 0.176666
+MergeSort: Avg # of hires for 1010000: 40322848
+ Time: 0.185694
+MergeSort: Avg # of hires for 1060000: 42445696
+ Time: 0.197110
+QuickSort: Avg # of hires for 10000: 550778
+ Time: 0.003837
+QuickSort: Avg # of hires for 60000: 18319980
+ Time: 0.111280
+QuickSort: Avg # of hires for 110000: 61045778
+ Time: 0.365097
+QuickSort: Avg # of hires for 160000: 128790535
+ Time: 0.766362
+QuickSort: Avg # of hires for 210000: 221602421
+ Time: 1.317039
+QuickSort: Avg # of hires for 260000: 339420592
+ Time: 2.008534
+QuickSort: Avg # of hires for 310000: 482055641
+ Time: 2.853788
+QuickSort: Avg # of hires for 360000: 649941344
+ Time: 3.845135
+QuickSort: Avg # of hires for 410000: 842570459
+ Time: 4.979772
+QuickSort: Avg # of hires for 460000: 1060558464
+ Time: 6.278922
+QuickSort: Avg # of hires for 510000: 1303165537
+ Time: 7.692113
+QuickSort: Avg # of hires for 560000: 1571094977
+ Time: 9.274223
+QuickSort: Avg # of hires for 610000: 1863785497
+ Time: 11.001003
+QuickSort: Avg # of hires for 660000: 2181365139
+ Time: 12.905660
+QuickSort: Avg # of hires for 710000: 2524132614
+ Time: 14.889145
+QuickSort: Avg # of hires for 760000: 2892077065
+ Time: 17.084200
+QuickSort: Avg # of hires for 810000: 3284722074
+ Time: 19.361157
+QuickSort: Avg # of hires for 860000: 3702482333
+ Time: 21.827069
+QuickSort: Avg # of hires for 910000: 4145250767
+ Time: 24.454442
+QuickSort: Avg # of hires for 960000: 4613027774
+ Time: 27.192586
+QuickSort: Avg # of hires for 1010000: 5105793086
+ Time: 30.092100
+QuickSort: Avg # of hires for 1060000: 5623606274
+ Time: 33.159399
+RandQuickSort: Avg # of hires for 10000: 547677
+ Time: 0.003814
+RandQuickSort: Avg # of hires for 60000: 18326746
+ Time: 0.111288
+RandQuickSort: Avg # of hires for 110000: 61062100
+ Time: 0.367691
+RandQuickSort: Avg # of hires for 160000: 128790385
+ Time: 0.765689
+RandQuickSort: Avg # of hires for 210000: 221535079
+ Time: 1.316474
+RandQuickSort: Avg # of hires for 260000: 339299511
+ Time: 2.007756
+RandQuickSort: Avg # of hires for 310000: 482119327
+ Time: 2.852062
+RandQuickSort: Avg # of hires for 360000: 649850706
+ Time: 3.839361
+RandQuickSort: Avg # of hires for 410000: 842685757
+ Time: 4.977908
+RandQuickSort: Avg # of hires for 460000: 1060388578
+ Time: 6.263860
+RandQuickSort: Avg # of hires for 510000: 1303055360
+ Time: 7.712460
+RandQuickSort: Avg # of hires for 560000: 1570933814
+ Time: 9.266430
+RandQuickSort: Avg # of hires for 610000: 1863628804
+ Time: 10.991383
+RandQuickSort: Avg # of hires for 660000: 2181560758
+ Time: 12.859995
+RandQuickSort: Avg # of hires for 710000: 2524334832
+ Time: 14.885790
+RandQuickSort: Avg # of hires for 760000: 2892171976
+ Time: 17.050626
+RandQuickSort: Avg # of hires for 810000: 3284942703
+ Time: 19.356230
+RandQuickSort: Avg # of hires for 860000: 3702371483
+ Time: 21.805696
+RandQuickSort: Avg # of hires for 910000: 4145117593
+ Time: 24.435345
+RandQuickSort: Avg # of hires for 960000: 4612789802
+ Time: 27.198659
+RandQuickSort: Avg # of hires for 1010000: 5105577055
+ Time: 30.100292
+RandQuickSort: Avg # of hires for 1060000: 5623368909
+ Time: 33.164770
+HeapSort: Avg # of hires for 10000: 123266
+ Time: 0.004461
+HeapSort: Avg # of hires for 60000: 892443
+ Time: 0.030939
+HeapSort: Avg # of hires for 110000: 1732562
+ Time: 0.059744
+HeapSort: Avg # of hires for 160000: 2605331
+ Time: 0.089752
+HeapSort: Avg # of hires for 210000: 3502417
+ Time: 0.120190
+HeapSort: Avg # of hires for 260000: 4407155
+ Time: 0.150872
+HeapSort: Avg # of hires for 310000: 5339054
+ Time: 0.182550
+HeapSort: Avg # of hires for 360000: 6281085
+ Time: 0.214678
+HeapSort: Avg # of hires for 410000: 7229722
+ Time: 0.246705
+HeapSort: Avg # of hires for 460000: 8181327
+ Time: 0.278951
+HeapSort: Avg # of hires for 510000: 9137226
+ Time: 0.311525
+HeapSort: Avg # of hires for 560000: 10109819
+ Time: 0.344248
+HeapSort: Avg # of hires for 610000: 11094219
+ Time: 0.380093
+HeapSort: Avg # of hires for 660000: 12082763
+ Time: 0.412709
+HeapSort: Avg # of hires for 710000: 13075653
+ Time: 0.457201
+HeapSort: Avg # of hires for 760000: 14071432
+ Time: 0.488834
+HeapSort: Avg # of hires for 810000: 15070058
+ Time: 0.512272
+HeapSort: Avg # of hires for 860000: 16070174
+ Time: 0.546092
+HeapSort: Avg # of hires for 910000: 17072187
+ Time: 0.581721
+HeapSort: Avg # of hires for 960000: 18076151
+ Time: 0.656094
+HeapSort: Avg # of hires for 1010000: 19081086
+ Time: 0.649694
+HeapSort: Avg # of hires for 1060000: 20092948
+ Time: 0.682539
