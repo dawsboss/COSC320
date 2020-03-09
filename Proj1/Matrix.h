@@ -89,16 +89,16 @@ Matrix<DataType> Inverse(){
     Temp = pad(exp2((int)log2(Rows)+1)-Rows);
     // std::cout<<"Test : Inverse() : Temp"<<std::endl;
     // Temp.print();
-    Temp = Temp._Inverse();
-    Matrix<DataType> rtn(Rows,Columns);
-    for(int i=0;i<Rows;i++){
-      for(int j=0;j<Columns;j++){
-        rtn.setElement(i,j,Temp.getElement(i,j));
-      }
-    }
-    // std::cout<<"Test : Inverse() : rtn"<<std::endl;
-    // rtn.print();
-    return rtn;
+    // Temp = Temp._Inverse();
+    // Matrix<DataType> rtn(Rows,Columns);
+    // for(int i=0;i<Rows;i++){
+    //   for(int j=0;j<Columns;j++){
+    //     rtn.setElement(i,j,Temp.getElement(i,j));
+    //   }
+    // }
+    // // std::cout<<"Test : Inverse() : rtn"<<std::endl;
+    // // rtn.print();
+    // return rtn;
   }
 
   if(!isSymetric()){
@@ -107,24 +107,54 @@ Matrix<DataType> Inverse(){
     // rtn._Inverse();
     // return rtn * this->transpose();
 
-    std::cout << "Tmp is not symmetric right now " << std::endl;
-    this->print();
+    // std::cout << "Tmp is not symmetric right now " << std::endl;
+    // this->print();
     Matrix<DataType>tmpT = this->transpose();
-    std::cout << "Tmp 2 is tmp transpose" << std::endl;
-    tmpT.print();
+    // std::cout << "Tmp 2 is tmp transpose" << std::endl;
+    // tmpT.print();
     Matrix<DataType> tmp3 = tmpT * *this;
-    std::cout << "tmp3 is (Symetric): " << std::endl;
+    // Temp = tmp3;
+
+    std::cout<<"tmp3 before setting Temp\n";
     tmp3.print();
-    std::cout << "What is happening here? " << std::endl;
-    (tmp3.Inverse()).print();
-    (tmp3.Inverse() * tmp3).print();
-    Matrix<DataType> tmp4 = tmp3.Inverse() * tmpT;
-    std::cout << "Now Inverse!" << std::endl;
-    tmp4.print();
-    return tmp4;
+    for(int i=0; i<tmp3.Rows; i++){
+      for(int j=0; j<tmp3.Columns; j++){
+        Temp.arr[i][j] = tmp3.arr[i][j];
+      }
+    }
+    std::cout<<"Temp print()\n";
+    Temp.print();
+    // std::cout << "tmp3 is (Symetric): " << std::endl;
+    // tmp3.print();
+    // std::cout << "What is happening here? " << std::endl;
+    // (tmp3.Inverse()).print();
+    // (tmp3.Inverse() * tmp3).print();
+    // Matrix<DataType> tmp4 = tmp3.Inverse() * tmpT;
+    // std::cout << "Now Inverse!" << std::endl;
+    // tmp4.print();
+    // return tmp4;
   }
-  if(log2(Rows) - (int)log2(Rows) == 0)
-    return Temp._Inverse();
+    Temp = Temp._Inverse();
+    //The Matrix that will be returned
+    Matrix<DataType> rtn(Rows,Columns);
+
+
+    //Fix based on if assded or not
+    // if(log2(Rows) - (int)log2(Rows) != 0 ){
+      for(int i=0;i<Rows;i++){
+        for(int j=0;j<Columns;j++){
+          rtn.setElement(i,j,Temp.getElement(i,j));
+        }
+      }
+    // }
+
+    //If it was not symetric we have to do stuff
+    if(!isSymetric()){
+      rtn = rtn * this->transpose();
+    }
+
+
+      return rtn;
 
 }
 
