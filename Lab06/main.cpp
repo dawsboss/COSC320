@@ -151,8 +151,8 @@ void shuffle(int* oldArr, int len){
   int rand1;
   int rand2;
   for(int i = 0; i<(len); i++){
-    rand2 = (int)rand() % len;
-    rand1 = (int)rand() % len;
+    rand2 = (int)rand() % (len-i) + i;
+    rand1 = (int)rand() % (len-i) + i;
     swap(oldArr[rand1], oldArr[rand2]);
   }
 }
