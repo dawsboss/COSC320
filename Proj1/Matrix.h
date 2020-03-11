@@ -85,7 +85,7 @@ Matrix<DataType> Inverse(){
   if( this->Rows != this->Columns)
     throw "Matrix not square!";
   if(log2(Rows) - (int)log2(Rows) !=0){
-    std::cout<<"Matrix not padded and needs it"<<std::endl;
+    //std::cout<<"Matrix not padded and needs it"<<std::endl;
     Temp = pad(exp2((int)log2(Rows)+1)-Rows);
     // std::cout<<"Test : Inverse() : Temp"<<std::endl;
     // Temp.print();
@@ -115,15 +115,15 @@ Matrix<DataType> Inverse(){
     Matrix<DataType> tmp3 = tmpT * *this;
     // Temp = tmp3;
 
-    std::cout<<"tmp3 before setting Temp\n";
-    tmp3.print();
+    //std::cout<<"tmp3 before setting Temp\n";
+    //tmp3.print();
     for(int i=0; i<tmp3.Rows; i++){
       for(int j=0; j<tmp3.Columns; j++){
         Temp.arr[i][j] = tmp3.arr[i][j];
       }
     }
-    std::cout<<"Temp print()\n";
-    Temp.print();
+    //std::cout<<"Temp print()\n";
+    //Temp.print();
     // std::cout << "tmp3 is (Symetric): " << std::endl;
     // tmp3.print();
     // std::cout << "What is happening here? " << std::endl;
@@ -247,8 +247,8 @@ Matrix<DataType> _Inverse(){
       }else if(i>=Rows/2 && j<(Columns/2)){
         AInverse.setElement(i, j, U.getElement(i-(Rows/2),j));
       }else if(i<(Rows/2) && j>=Columns/2){//Should just be the transpose of C but heck we will do it
-        std::cout<<"I: "<<i<<" J:"<<j<<std::endl;
-				AInverse.setElement(i, j, T.getElement(i,j-(Columns/2)));
+        //std::cout<<"I: "<<i<<" J:"<<j<<std::endl;
+	AInverse.setElement(i, j, T.getElement(i,j-(Columns/2)));
       }else if(i>=(Rows/2) && j>=(Columns/2)){
         AInverse.setElement(i, j, V.getElement(i-(Rows/2),j-(Columns/2)));
       }else{
