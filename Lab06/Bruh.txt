@@ -70,6 +70,7 @@ MergeSort: Avg # of hires for 1010000: 40322848
  Time: 0.185694
 MergeSort: Avg # of hires for 1060000: 42445696
  Time: 0.197110
+ 
 QuickSort: Avg # of hires for 10000: 550778
  Time: 0.003837
 QuickSort: Avg # of hires for 60000: 18319980
@@ -114,6 +115,7 @@ QuickSort: Avg # of hires for 1010000: 5105793086
  Time: 30.092100
 QuickSort: Avg # of hires for 1060000: 5623606274
  Time: 33.159399
+ 
 RandQuickSort: Avg # of hires for 10000: 547677
  Time: 0.003814
 RandQuickSort: Avg # of hires for 60000: 18326746
@@ -158,6 +160,7 @@ RandQuickSort: Avg # of hires for 1010000: 5105577055
  Time: 30.100292
 RandQuickSort: Avg # of hires for 1060000: 5623368909
  Time: 33.164770
+ 
 HeapSort: Avg # of hires for 10000: 123266
  Time: 0.004461
 HeapSort: Avg # of hires for 60000: 892443
