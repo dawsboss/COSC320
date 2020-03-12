@@ -1,6 +1,8 @@
 #include <iostream>//pritning
 #include "Logger.h"//File writer
 #include <chrono>//chrono
+#include "HeapQ.h"
+
 
 struct Heap {
   int* arr; // the underlying array
@@ -38,6 +40,7 @@ struct Heap {
 unsigned long long Hires=0;
 double Times = 0;
 void shuffle(int*, int);
+void shuffleV2(int*, int);
 int* makeRandomArray(int);
 void swap(int&, int&);
 int* makeCanadates(int);
@@ -91,6 +94,31 @@ int main(){
   Logger::ln();
   std::cout<<std::endl;
 
+  //Testing our shuffleV2
+  std::cout<<"Testing out shuffleV2 on a 10 long sorted array: "<<std::endl;
+  int* ShufTest = new int[10];
+  for(int i=1; i<=10; i++){
+    ShufTest[i-1] = i;
+  }
+
+
+  for(int i=0; i<10; i++){
+    std::cout<<ShufTest[i]<<" ";
+  }
+  std::cout<<std::endl;
+
+
+  shuffleV2(ShufTest, 10);
+
+
+  for(int i=0; i<10; i++){
+    std::cout<<ShufTest[i]<<" ";
+  }
+  std::cout<<std::endl;
+  delete [] ShufTest;
+
+
+  //Spilts up hiring porblem vs the sorting aglgoritms
   std::cout<<"Press enter to continue"<<std::endl;
   std::cin.ignore();
   //Test Heap, Quick, Merge, and RandQuick Sorts
@@ -103,7 +131,7 @@ int main(){
       std::cout<<"Back to the top"<<std::endl;
       for(int k=0; k<20; k++){
         arr = makeRandomArray(i);
-        shuffle(arr, i);
+        shuffleV2(arr, i);
         timeSort(Sorters[j], arr, i);
         delete [] arr;
       }
@@ -148,12 +176,23 @@ int main(){
 
 
 void shuffle(int* oldArr, int len){
-  int rand1;
-  int rand2;
+  int Rand;
   for(int i = 0; i<(len); i++){
-    rand2 = (int)rand() % (len-i) + i;
-    rand1 = (int)rand() % (len-i) + i;
-    swap(oldArr[rand1], oldArr[rand2]);
+    Rand = (int)rand() % (len) + i;
+    swap(oldArr[i], oldArr[Rand]);
+  }
+}
+
+void shuffleV2(int* oldArr, int len){
+  HeapQ<int> HeapOld;
+  int Rand;
+  for(int i=0; i<len; i++){
+    Rand = (int)rand() % (len*len*len) +1;
+    HeapOld.Insert(oldArr[i], Rand);
+  }
+
+  for(int i=len-1; i>=0; i--){
+     oldArr[i] = HeapOld.ExtractMax();
   }
 }
 
