@@ -178,7 +178,7 @@ int main(){
 void shuffle(int* oldArr, int len){
   int Rand;
   for(int i = 0; i<(len); i++){
-    Rand = (int)rand() % (len) + i;
+    Rand = (int)rand() % (len-i) + i;
     swap(oldArr[i], oldArr[Rand]);
   }
 }

@@ -47,10 +47,15 @@ Matrix<DataType>* Matrix<DataType>::operator=(const Matrix& B){
   if((this) == &B){
     return (this);
   }
-  for(unsigned long long i=0; i<this->Columns; i++){
-    delete[] arr[i];
+  //if the Matrix B is empty already
+  if(this->Rows==0 || this->Columns==0){
+
+  }else{
+    for(unsigned long long i=0; i<this->Columns; i++){
+      delete[] arr[i];
+    }
+    delete [] arr;
   }
-  delete [] arr;
 
   this->Rows=B.Rows;
   this->Columns=B.Columns;
@@ -160,6 +165,19 @@ void Matrix<DataType>::setTriangleMatrix(){
   }
 }
 
+//Gives a random value in every position in a matrix
+template<class DataType>
+void Matrix<DataType>::setRandMatrix(){
+  if(this->Rows == 0 || this->Columns == 0){
+    std::cout<<"No room (m or n == 0)\n";
+  }
+  for (unsigned long long j = 0; j < this->Rows; ++j) {
+    for (unsigned long long i = 0; i < this->Columns; ++i) {
+      this->arr[i][j] = (int)rand() % (100) + 1;
+    }
+  }
+}
+
 
 
 //raises this matrix to a given n power
@@ -178,13 +196,17 @@ Matrix<DataType> Matrix<DataType>::pow(int n){
 template<class DataType>
 Matrix<DataType> Matrix<DataType>::operator+(Matrix<DataType> B){
   //Catches edge case that the two given matrixies are not the same size
+
   if( this->Rows!=B.getN() || this->Columns!=B.getM() ){
+    this->numOfOp++;
     std::string x = "The matrixes don't have the same size""The matrixes don't have the same size";
     throw x;
   }
   Matrix<DataType> rtn(this->Rows, this->Columns);
   for(unsigned long long i=0; i<this->Rows; i++){
+    this->numOfOp++;
     for(unsigned long long j=0; j<this->Columns; j++){
+      this->numOfOp+=2;
       rtn.arr[i][j] = (this->arr[i][j] + B.arr[i][j]);
     }
   }
@@ -196,12 +218,15 @@ template<class DataType>
 Matrix<DataType> Matrix<DataType>::operator-(Matrix<DataType> B){
   //Catches eadge case that the two given matrixies are not the same size
   if( this->Rows!=B.getN() || this->Columns!=B.getM() ){
+    this->numOfOp++;
     std::string x = "The matrixes don't have the same size";
     throw x;
   }
   Matrix<DataType> rtn(this->Rows, this->Columns);
   for(unsigned long long i=0; i<this->Rows; i++){
+    this->numOfOp++;
     for(unsigned long long j=0; j<this->Columns; j++){
+      this->numOfOp+=2;
       rtn.arr[i][j] = (this->arr[i][j] - B.arr[i][j]);
     }
   }
@@ -213,16 +238,21 @@ Matrix<DataType> Matrix<DataType>::operator-(Matrix<DataType> B){
 template<class DataType>
 Matrix<DataType> Matrix<DataType>::operator*(Matrix<DataType> B){
   if( this->Columns != B.Rows ){
+    this->numOfOp++;
     std::string x = "The matrixes don't have the same size";
     throw x;
   }
   Matrix<DataType> rtn(this->Rows, B.Columns);
   for(unsigned long long both = 0; both < this->Rows; both++){
+    this->numOfOp++;
     for(unsigned long long i = 0; i < B.Columns; i++){
+      this->numOfOp++;
       DataType sum=0;
       for(unsigned long long j = 0; j < this->Columns; j++){
+        this->numOfOp+=2;
 	        sum += this->arr[both][j]*B.arr[j][i];
       }
+      this->numOfOp++;
       rtn.arr[both][i] = sum;
     }
   }
@@ -234,12 +264,15 @@ template<class DataType>
 Matrix<DataType> Matrix<DataType>::operator*(int B){
   //Catches edge case that the two given matrixies are not the same size
   if( this->Rows ==0 || this->Columns ==0 ){
+    this->numOfOp++;
     std::string x = "The matrixes don't have the same size";
     throw x;
   }
   Matrix<DataType> rtn(this->Rows, this->Columns);
   for(unsigned long long i=0; i<this->Rows; i++){
+    this->numOfOp++;
     for(unsigned long long j=0; j<this->Columns; j++){
+      this->numOfOp+=2;
       // rtn[i][j] = (this->arr[i][j] + B.arr[i][j]);
       rtn.arr[i][j] = (this->arr[i][j] * B);
     }

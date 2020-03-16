@@ -37,6 +37,7 @@ private:
   }
 
 public:
+  int numOfOp=0;
   //Lab04:
   Matrix();//Defualt Constructor
   Matrix(unsigned long long , unsigned long long );
@@ -56,8 +57,10 @@ public:
   void Reinit();
   //sets the matrix to have all the same number x
   void setMatrix(DataType);
-  //Makes
+  //Makes a triangle matrix
   void setTriangleMatrix();
+  //Randomly assigns values in the matrix
+  void setRandMatrix();
 
 
   //raises this matrix to a given n power
@@ -67,6 +70,45 @@ public:
   Matrix operator*(Matrix B);//Multiply Matrix A and B
   //Extra Credit add a multiply operator that allows to mulitply by scalors
   Matrix operator*(int B);
+
+
+	/*Matrix<DataType> Strassen(Matrix<DataType> A, Matrix<DataType> B){
+		Matrix<DataType> A11;
+		Matrix<DataType> A12;
+		Matrix<DataType> A21;
+		Matrix<DataType> A22;
+
+		Matrix<DataType> B11;
+		Matrix<DataType> B12;
+		Matrix<DataType> B21;
+		Matrix<DataType> B22;
+
+
+		for(){
+
+		}
+
+	}*/
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
   //TODO: New for proj1
   Matrix<DataType> transpose(){
