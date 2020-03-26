@@ -87,7 +87,7 @@ size_t Hash1(size_t toHash){
 	size_t P = 24;
 	size_t A=997;
 
-	
+
 
 	size_t a = A*toHash;
 	size_t one = 1;
@@ -104,18 +104,25 @@ void displayHash(size_t h){
 
 
 size_t Hash2(std::string s){
+		size_t A = 997;
+
 	size_t sum=0;
 	for(int i=0; i<s.length(); i++){
-		sum += (int)s[i];
+		sum += ((int)s[i]);
 	}
 
-	size_t W = exp2(64);
-	size_t P=53;
-	size_t M = exp2(P);
-	size_t A = 997;
+	size_t w = 32;
+	size_t P = 24;
 
 
-	return (int)((A*sum)%W)/(exp2(64-P));
+
+	size_t a = A*sum;
+	size_t one = 1;
+	size_t mod = a & ((one<<w)-one);
+	return mod>>(w-P);
+
+
+	// return (int)((A*sum)%W)/(exp2(64-P));
 }
 
 
