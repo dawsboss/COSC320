@@ -24,7 +24,17 @@ template<class DataType>
     if(this==&old){
       return *(this);
     }
-    ListNode* oldCursor=old.head;
+    ListNode* oldCursor=this->head;
+    if(head){
+      while(head){
+        head = head->next;
+        delete oldCursor;
+        oldCursor = head;
+      }
+      head = nullptr;
+      tail = nullptr;
+    }
+    oldCursor = head;
     while(oldCursor){
       putBack(oldCursor->data);
       oldCursor=oldCursor->next;
@@ -154,7 +164,8 @@ void SUList<DataType>::putFront(const DataType&x){
     tail=newNode;
     newNode->next=nullptr;
     newNode->previous=nullptr;
-  }
+  	return;
+	}
   newNode->next=head;
   newNode->previous=nullptr;
   head->previous=newNode;
@@ -214,12 +225,12 @@ void SUList<DataType>::display() const{
     return;
   }
   while(cursor){
-    cout<<cursor->data<<endl;
+		std::cout<<cursor->data<<std::endl;
     cursor=cursor->next;
   }
 
 }
-//Display overloaded for Payroll
+/*//Display overloaded for Payroll
 template<>
 void SUList<PayRoll>::display()  const{
   ListNode* cursor=head;
@@ -232,4 +243,18 @@ void SUList<PayRoll>::display()  const{
     cursor=cursor->next;
   }
 
+}*/
+
+
+template<class T>
+int SUList<T>::size() const{
+	ListNode* cursor = head;
+	int counter =0;
+	//std::cout<<"In size()\n";
+	while(cursor){
+		counter++;
+		cursor=cursor->next;
+	}
+	return counter;
 }
+

@@ -2,7 +2,8 @@
 #define SULIST_H
 
 #include <iostream>
-#include "PayRoll.h"
+#include "Dictionary.h"
+
 
 template <class DataType>
 class SUList{

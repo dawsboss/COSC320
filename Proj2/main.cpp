@@ -1,13 +1,26 @@
 #include <iostream>
+#include "Dictionary.h"
+#include <fstream>
 
 
 int main(){
 
-	Dictionary	d;
-	while(...){
-		d[h(word)].insert(word);
+	std::ifstream readIn;
+	readIn.open("english.txt");
+
+	Dictionary d;
+
+	std::string holder;
+//	while(!readIn.eof()){
+	while(readIn>>holder){
+		//readIn>>holder;
+		d.insert(holder);
 	}
 
+	d.printAtateOfHash();
 
+
+
+	readIn.close();
 	return 0;
 }
