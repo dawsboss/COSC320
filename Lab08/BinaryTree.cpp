@@ -210,10 +210,60 @@ TreeNode* BinaryTree::Psearch(int k){
 	throw s;
 }
 
+//Transplant: will takes a root of a tree and a node from this tree and replace this nodes tree with the fiven root
+void BinaryTree::transplant(TreeNode U,TreeNode V){
+	if(!U.parent){
+		root = V;
+	}else if(U.parrent.right == U){
+		U.parent=right = V;
+	}else{
+		U.parent.left = V;
+	}
+	if(V){
+		V.parent = U.parent;			
+	}
+}
 
+//Successor:: will return the address to the closeest bigger key
+TreeNode* BinaryTree::Psuccessor(int k){
+	TreeNode* U = Psearch(k);	
+	if(U.right){
+		return Pminimum(U.right);
+	}else{
+		while(U != U.left && U.parent){
+			U=U.parent;
+		}
+		return U.parent;
+	}
+}
 
+int BinaryTree::successor(int k){
+	if(!root){
+		std::string s = "No root!";
+		throw s;
+	}
+	return Psuccessor->key;
+}
 
-
+//remove:: will take on node out the node with the given key k and will fix the tree to follow the rtules of a Binary Tree
+void BinaryTree::remove(int k){
+	TreeNode* Z = Psearch(k);
+	if(!Z.left){
+		transplant(Z,Z.right);
+	}else if(!Z.right){
+		transplant(Z,Z.left);
+	}else{
+		TreeNode* Y = Pminimum(Z.right);
+		if(Y != Z.right){
+			transplant(Y,Y.right);
+			Y.right = Z.right;
+			Y.right.parent = y;
+		}
+		transplant(Z,Y);
+		Y.left = Z.left;
+		Z.left.parent = Y;
+	}
+}
 
 
 //oof
