@@ -1,7 +1,7 @@
 Avg 10 # of emplyees: 4
-Avg 20 # of emplyees: 6
-Avg 30 # of emplyees: 8
-Avg 40 # of emplyees: 10
+Avg 20 # of emplyees: 5
+Avg 30 # of emplyees: 7
+Avg 40 # of emplyees: 9
 Avg 50 # of emplyees: 11
 Avg 60 # of emplyees: 13
 Avg 70 # of emplyees: 15
@@ -18,7 +18,7 @@ Avg 450 # of emplyees: 23
 Avg 500 # of emplyees: 24
 Avg 1000 # of emplyees: 16
 Avg 1500 # of emplyees: 14
-Avg 2000 # of emplyees: 14
+Avg 2000 # of emplyees: 15
 Avg 2500 # of emplyees: 15
 Avg 3000 # of emplyees: 17
 Avg 3500 # of emplyees: 18
