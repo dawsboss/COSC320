@@ -7,21 +7,18 @@ BinaryTree::BinaryTree(){
 
 //Copy constructor TODO
 BinaryTree::BinaryTree(const BinaryTree& T){
-	if(!T.root){
 		root=nullptr;
-	}else{
 		copyTree(T.root);
-	}
 }
 
 //= operator
 BinaryTree& BinaryTree::operator=(const BinaryTree& T){
 	if(&T == this)
 		return *this;
-	
+
 	if(root)
 		removeTree(root);
-	
+
 	if(!T.root){
 		root = nullptr;
 	}else{
@@ -55,8 +52,7 @@ void BinaryTree::removeTree(TreeNode* T){
 
 //Used to insert a key in the correct spot with a given k key
 void BinaryTree::insert(int k){
-	//TODO TreeNode* newNode(k); this is breaking for some reason
-	TreeNode* newNode;
+	TreeNode* newNode = new TreeNode;
 	newNode->key = k;
 	newNode->left = nullptr;
 	newNode->right = nullptr;
@@ -65,28 +61,24 @@ void BinaryTree::insert(int k){
 		root = newNode;
 		return;
 	}
-	
+
 	TreeNode* cursor = root;
 	TreeNode* prev = root;
 	while(cursor){
 		if(cursor->key > newNode->key){
 			prev = cursor;
-			if(!cursor->left){
-				prev->left = newNode;
-				newNode->parent = prev;
-				return;
-			}
 			cursor = cursor->left;
 		}else{
 			prev = cursor;
-			if(!cursor->right){
-				prev->right = newNode;
-				newNode->parent = prev;
-				return;
-			}
 			cursor = cursor->right;
 		}
 	}
+	if(newNode->key < prev->key){
+		prev->left = newNode;
+	}else{
+		prev->right = newNode;
+	}
+	newNode->parent = prev;
 }
 
 //Wrapper function for PinOrder
@@ -123,16 +115,16 @@ void BinaryTree::Pprint(TreeNode* T){
 
 	}*/
 	if(T){
-		std::cout<< T->key <<" ";
+		std::cout<<T<<" : "<< T->key <<"| ";
 		Pprint(T->left);
-		Pprint(T->right);	
+		Pprint(T->right);
 	}
 }
 
 //This returns the largest number in the tree
 int BinaryTree::maximum(){
 	try{
-	return Pmaximum()->key;
+	return Pmaximum(root)->key;
 	}catch(std::string s){
 		throw s;
 	}catch(...){
@@ -141,13 +133,13 @@ int BinaryTree::maximum(){
 	}
 }
 
-//Runs all the ways down the right side of the tree where the highest number lives 
-TreeNode* BinaryTree::Pmamimum(){
-	if(!root){
+//Runs all the ways down the right side of the tree where the highest number lives
+BinaryTree::TreeNode* BinaryTree::Pmaximum(TreeNode* T){
+	if(!T){
 		std::string s = "Error: No root!";
 		throw s;
 	}
-	TreeNode* cursor = root;
+	TreeNode* cursor = T;
 	while(cursor->right){
 		cursor=cursor->right;
 	}
@@ -157,7 +149,7 @@ TreeNode* BinaryTree::Pmamimum(){
 //This returns the smallest number in the tree
 int BinaryTree::minimum(){
 	try{
-		return Pminimum()->key;
+		return Pminimum(root)->key;
 	}catch(std::string s){
 		throw s;
 	}catch(...){
@@ -167,12 +159,12 @@ int BinaryTree::minimum(){
 }
 
 //Runs all the way down the left sid eof the tree, where the smallest number lives
-TreeNode* BinaryTree::Pminimum(){
-	if(!root){
+BinaryTree::TreeNode* BinaryTree::Pminimum(TreeNode* T){
+	if(!T){
 		std::string s = "Error: No root!";
 		throw s;
 	}
-	TreeNode* cursor = root;
+	TreeNode* cursor = T;
 	while(cursor->left){
 		cursor = cursor->left;
 	}
@@ -191,7 +183,7 @@ bool BinaryTree::search(int k){
 }
 
 //Searches the tree for the given key and returns the address of that node, otherwise it will throw it is not found
-TreeNode* BinaryTree::Psearch(int k){
+BinaryTree::TreeNode* BinaryTree::Psearch(int k){
 	TreeNode* cursor = root;
 	TreeNode* prev = root;
 	while(cursor){
@@ -202,38 +194,48 @@ TreeNode* BinaryTree::Psearch(int k){
 			prev = cursor;
 			cursor = cursor->right;
 		}
-	}
-	if(prev->key == k){
-		return prev;
+
+		if(prev->key == k){
+			return prev;
+		}
 	}
 	std::string s = "Not in list";
 	throw s;
 }
 
 //Transplant: will takes a root of a tree and a node from this tree and replace this nodes tree with the fiven root
-void BinaryTree::transplant(TreeNode U,TreeNode V){
-	if(!U.parent){
+void BinaryTree::transplant(TreeNode* U,TreeNode* V){
+	if(!U->parent){
 		root = V;
-	}else if(U.parrent.right == U){
-		U.parent=right = V;
+	}else if(U->parent->right == U){
+		U->parent->right = V;
 	}else{
-		U.parent.left = V;
+		U->parent->left = V;
 	}
 	if(V){
-		V.parent = U.parent;			
+		V->parent = U->parent;
 	}
 }
 
 //Successor:: will return the address to the closeest bigger key
-TreeNode* BinaryTree::Psuccessor(int k){
-	TreeNode* U = Psearch(k);	
-	if(U.right){
-		return Pminimum(U.right);
+BinaryTree::TreeNode* BinaryTree::Psuccessor(int k){
+	TreeNode* U;
+	try{
+		U = Psearch(k);
+	}catch(std::string s){
+		throw s;
+	}
+	TreeNode* start = U;
+	if(U->right){
+		return Pminimum(U->right);
 	}else{
-		while(U != U.left && U.parent){
-			U=U.parent;
+		while(U->parent && U != U->parent->left){
+			U=U->parent;
 		}
-		return U.parent;
+		if(!U->parent){
+			return start;
+		}
+		return U->parent;
 	}
 }
 
@@ -242,27 +244,30 @@ int BinaryTree::successor(int k){
 		std::string s = "No root!";
 		throw s;
 	}
-	return Psuccessor->key;
+	//std::cout<<Psuccessor(k)<<"\n";
+	return Psuccessor(k)->key;//TODO breaks if there is no successor (if k is the max)
 }
 
 //remove:: will take on node out the node with the given key k and will fix the tree to follow the rtules of a Binary Tree
 void BinaryTree::remove(int k){
 	TreeNode* Z = Psearch(k);
-	if(!Z.left){
-		transplant(Z,Z.right);
-	}else if(!Z.right){
-		transplant(Z,Z.left);
+	if(!Z) return;
+	if(!Z->left){
+		transplant(Z,Z->right);
+	}else if(!Z->right){
+		transplant(Z,Z->left);
 	}else{
-		TreeNode* Y = Pminimum(Z.right);
-		if(Y != Z.right){
-			transplant(Y,Y.right);
-			Y.right = Z.right;
-			Y.right.parent = y;
+		TreeNode* Y = Pminimum(Z->right);
+		if(Y != Z->right){
+			transplant(Y,Y->right);
+			Y->right = Z->right;
+			Y->right->parent = Y;
 		}
 		transplant(Z,Y);
-		Y.left = Z.left;
-		Z.left.parent = Y;
+		Y->left = Z->left;
+		Z->left->parent = Y;
 	}
+	delete Z;
 }
 
 

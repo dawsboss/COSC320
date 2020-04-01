@@ -1,0 +1,50 @@
+1000 Tree
+Inserting time: 0.006574
+Removing time: 0.002703
+Searching time: 0.007292
+ 
+2000 Tree
+Inserting time: 0.000272
+Removing time: 0.000386
+Searching time: 0.000155
+ 
+3000 Tree
+Inserting time: 0.000332
+Removing time: 0.000403
+Searching time: 0.000160
+ 
+4000 Tree
+Inserting time: 0.000426
+Removing time: 0.000382
+Searching time: 0.000208
+ 
+5000 Tree
+Inserting time: 0.000458
+Removing time: 0.000754
+Searching time: 0.000170
+ 
+6000 Tree
+Inserting time: 0.000501
+Removing time: 0.000398
+Searching time: 0.000174
+ 
+7000 Tree
+Inserting time: 0.000578
+Removing time: 0.000385
+Searching time: 0.000188
+ 
+8000 Tree
+Inserting time: 0.000698
+Removing time: 0.000398
+Searching time: 0.000160
+ 
+9000 Tree
+Inserting time: 0.000707
+Removing time: 0.000395
+Searching time: 0.000181
+ 
+10000 Tree
+Inserting time: 0.000770
+Removing time: 0.000401
+Searching time: 0.000166
+ 

@@ -10,20 +10,20 @@ private:
 			TreeNode* left;
 			TreeNode* right;
 			TreeNode* parent;
-			TreeNode(int k){
+			/*TreeNode(int k){
 				key = k;
 				left = nullptr;
 				right = nullptr;
 				parent = nullptr;
-			}
+			}*/
 	};
 	TreeNode* root;
 	
-	void transplant(TreeNode, TreeNode);
+	void transplant(TreeNode*, TreeNode*);
 	//Private is for private verssion of these functions
 	TreeNode* Psuccessor(int);
-	TreeNode* Pmaximum();
-	TreeNode* Pminimum();
+	TreeNode* Pmaximum(TreeNode*);
+	TreeNode* Pminimum(TreeNode*);
 	TreeNode* Psearch(int);
 	void PinOrder(TreeNode*);	
 	void Pprint(TreeNode*);

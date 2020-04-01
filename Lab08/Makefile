@@ -9,3 +9,6 @@ BinaryTree.o: BinaryTree.cpp BinaryTree.h
 
 clean:
 	rm *.o -f main
+
+submit:
+	make clean; zip Lab08.zip *

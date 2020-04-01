@@ -4,6 +4,7 @@
 #include <iostream>
 #include "SUList.h"
 #include "math.h"
+#include "Logger.h"
 
 class Dictionary{
 
@@ -22,7 +23,11 @@ class Dictionary{
 			HashItems(std::string s){
 				data = s;
 			}
+			bool operator==(const HashItems& x){
+				return data==x.data;
+			}
 		};
+
 
 		SUList<HashItems> HashTable[numOfHashes];
 
@@ -35,13 +40,8 @@ class Dictionary{
 		Dictionary& operator= (const Dictionary&);
 
 		void insert(std::string data);
+		bool search(std::string);
 
 		void printAtateOfHash();
-
-
-
-
-
-
 };
 #endif
