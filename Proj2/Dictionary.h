@@ -5,6 +5,9 @@
 #include "SUList.h"
 #include "math.h"
 #include "Logger.h"
+#include <fstream>
+#include <chrono>
+#include <sstream>
 
 class Dictionary{
 
@@ -16,7 +19,7 @@ class Dictionary{
 			//int numberOfUse=0; This could be cool because then I can add a real spell checker that can
 				//suggest worlds based on how close they were and the most used first
 			std::string data;
-		
+
 			HashItems(){
 				data = "";
 			}
@@ -38,6 +41,11 @@ class Dictionary{
 		Dictionary(const Dictionary&);
 		~Dictionary();
 		Dictionary& operator= (const Dictionary&);
+
+		void init(std::string);
+
+		void autoCorrect(std::string);
+		SUList<std::string> __autoCorrect(std::string);
 
 		void insert(std::string data);
 		bool search(std::string);

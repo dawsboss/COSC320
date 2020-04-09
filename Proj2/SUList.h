@@ -27,7 +27,10 @@ public:
   int size() const;              // Returns the number of elements
   bool contains(const DataType&);// Tests for membership
   SUList<DataType>& operator=(const SUList<DataType>&); // Overloaded assignment
+  SUList<DataType>& operator+(SUList<DataType>);
   void display() const;
+  DataType operator[](int);
+  void clear();
 };
 #include "SUList.cpp"
 #endif

@@ -34,7 +34,7 @@ template<class DataType>
       head = nullptr;
       tail = nullptr;
     }
-    oldCursor = head;
+    oldCursor = old.head;
     while(oldCursor){
       putBack(oldCursor->data);
       oldCursor=oldCursor->next;
@@ -131,11 +131,13 @@ DataType SUList<DataType>::getBack(){
     temp=tail->data;
     head->next=nullptr;
     delete cursor;
+    tail = head;
     return temp;
   }
   if(head==tail){
     temp=head->data;
     delete head;
+    head = tail = nullptr;
     return temp;
   }
   temp=tail->data;
@@ -143,6 +145,7 @@ DataType SUList<DataType>::getBack(){
   cursor=tail->previous;
   cursor->next=nullptr;
   delete prev;
+  tail = cursor;
   return temp;
 }
 //This will push a new dataType onto the front of the list
@@ -193,6 +196,7 @@ void SUList<DataType>::putBack(const DataType&x){
   ListNode* newNode = new ListNode;
   newNode->data=x;
   newNode->next=nullptr;
+  newNode->previous = nullptr;
   if(!head){
     head=newNode;
     tail=newNode;
@@ -221,13 +225,14 @@ template<class DataType>
 void SUList<DataType>::display() const{
   ListNode* cursor=head;
   if(!head){
-    std::cout<<"Empty list!"<<std::endl;
+  //  std::cout<<"Empty list!"<<std::endl;
     return;
   }
   while(cursor){
-		std::cout<<cursor->data<<std::endl;
+		std::cout<<cursor->data<<" ";
     cursor=cursor->next;
   }
+  std::cout<<std::endl;
 
 }
 /*//Display overloaded for Payroll
@@ -248,13 +253,52 @@ void SUList<PayRoll>::display()  const{
 
 template<class T>
 int SUList<T>::size() const{
+  if(!head){
+    return 0;
+  }
 	ListNode* cursor = head;
 	int counter =0;
-	//std::cout<<"In size()\n";
+	// std::cout<<"In size()\n";
 	while(cursor){
 		counter++;
 		cursor=cursor->next;
 	}
+  // std::cout<<"Out of while loop"<<std::endl;
 	return counter;
 }
 
+
+template<class T>
+T SUList<T>::operator[](int k){
+ListNode* cursor = head;
+  for(int i=1; i<k; i++){
+    cursor=cursor->next;
+  }
+  if(cursor){
+    return cursor->data;
+  }else{
+    std::string thrw = "index out of bounds";
+    throw thrw;
+  }
+}
+
+template <class T>
+SUList<T>& SUList<T>::operator+(SUList<T> RHS){
+  int size = RHS.size();
+  for(int i=0; i<size; i++)
+    this->putFront(RHS[i]);
+  return *(this);
+}
+
+template<class T>
+void SUList<T>::clear(){
+  ListNode* cursor=head;
+  while(head){
+    cursor=head;
+    head=head->next;
+    delete cursor;
+  }
+  head=nullptr;
+  tail=nullptr;
+
+}
