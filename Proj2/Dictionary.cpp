@@ -157,7 +157,8 @@ void Dictionary::printAtateOfHash(){
 
 
 
-void Dictionary::autoCorrect(std::string input){
+double*  Dictionary::autoCorrect(std::string input){
+  int misspelledcount=0;
   for(int i=0; i<input.length(); i++){
     if(ispunct(input[i])){
       input.erase(i--, 1);
@@ -166,24 +167,30 @@ void Dictionary::autoCorrect(std::string input){
   std::stringstream ss;
   ss << input;
   std::string holder;
+  SUList<std::string> InputList;
   SUList<std::string> BadWordsSuggestions;
   SUList<std::string> GoodSuggestions;
+  SUList<std::string> GoodSuggestionsHolder;
   SUList<std::string> BadWordsSuggestions2;
   SUList<std::string> BadWordsSuggestions2Holder;
   SUList<std::string> GoodSuggestions2;
   SUList<std::string> GoodSuggestions2Holder;
   bool anyGoodSuggestions = false;
   bool anyGoodSuggestions2 = false;
+
+  auto start = std::chrono::system_clock::now();
+
   while (ss >> holder){
+    InputList.putBack(holder);
     if(!this->search(holder)){
       try{
         BadWordsSuggestions = __autoCorrect(holder);
-        std::cout<<"\""<<holder<<"\" was detected as misspelled, suggestions for a one latter replace: "<<BadWordsSuggestions.size()<<std::endl;
+        std::cout<<"\""<<holder<<"\" was detected as misspelled, suggestions for a one letter replace: "<<std::endl;
         if(BadWordsSuggestions.size() < 1){
           std::cout<<"No corrections avaliable!"<<std::endl;
           continue;
         }
-        for(int i=BadWordsSuggestions.size(); i>0; i--){
+        for(int i=BadWordsSuggestions.size()-1; i>0; i--){
           if(this->search(BadWordsSuggestions[i])){
             GoodSuggestions.putFront(BadWordsSuggestions[i]);
             std::cout<<"*"<<BadWordsSuggestions[i]<<"* ";
@@ -195,45 +202,132 @@ void Dictionary::autoCorrect(std::string input){
               std::cout<<"No corrections avaliable!"<<std::endl;
               continue;
             }
+
             //BadWordsSuggestions2Holder = BadWordsSuggestions2Holder + BadWordsSuggestions2;
-            for(int i=BadWordsSuggestions2.size(); i>0; i--){
+            for(int i=BadWordsSuggestions2.size()-1; i>0; i--){
               if(this->search(BadWordsSuggestions2[i])  && !GoodSuggestions2.contains(BadWordsSuggestions2[i])){
-                GoodSuggestions2.putFront(BadWordsSuggestions2[i]);
-                //std::cout<<BadWordsSuggestions2Holder[i]<<" ";
-                anyGoodSuggestions2 = true;
+                    std::cout<<"for loop shidd"<<std::endl;
+                    GoodSuggestions2.putFront(BadWordsSuggestions2[i]);
+                    anyGoodSuggestions2 = true;
               }
             }
           }
         }
-        if(!anyGoodSuggestions)
+
+        if(!anyGoodSuggestions){
           std::cout<<"No corrections avaliable!"<<std::endl;
-      }catch(...){
-        std::cout<<"REEEEEEEEEEEEEEEEEe"<<std::endl;
-      }
+        }else{
+          GoodSuggestions2Holder = GoodSuggestions2Holder+GoodSuggestions;
+        }
       std::cout<<std::endl;
       // std::cout<<"Half way"<<std::endl;
       std::cout<<std::endl;
-      std::cout<<"Suggestions for a two latter replace: "<<std::endl;
+      std::cout<<"Suggestions for a two letter replace: "<<std::endl;
       if(GoodSuggestions2.size() < 1){
         std::cout<<"No corrections avaliable!"<<std::endl;
         continue;
       }
-      if(!anyGoodSuggestions2)
+      if(!anyGoodSuggestions2){
         std::cout<<"No corrections avaliable!"<<std::endl;
-      for(int i=GoodSuggestions2.size(); i>0; i--){
+      }else{
+        GoodSuggestions2Holder = GoodSuggestions2Holder+GoodSuggestions2;
+      }
+      for(int i=GoodSuggestions2.size()-1; i>=0; i--){
           std::cout<<"*"<<GoodSuggestions2[i]<<"* ";
       }
       std::cout<<std::endl;
-      std::cout<<std::endl;
+    }catch(std::string s){
+      std::cout<<s<<std::endl;
+    }catch(...){
+      std::cout<<"REEEEEEEEEEEEEEEEEe"<<std::endl;
     }
+
+    }
+    //GoodSuggestions2Holder = GoodSuggestions2Holder+(GoodSuggestions + GoodSuggestions2);
     std::cout<<std::endl;
     BadWordsSuggestions.clear();
     GoodSuggestions.clear();
     BadWordsSuggestions2.clear();
     BadWordsSuggestions2Holder.clear();
     GoodSuggestions2.clear();
-    GoodSuggestions2Holder = GoodSuggestions2Holder+GoodSuggestions;
+
   }
+  auto end = std::chrono::system_clock::now();
+  std::chrono::duration<double> elapsed_seconds = end-start;
+  auto elapsed = end - start;
+  std::time_t end_time = std::chrono::system_clock::to_time_t(end);
+  // std::cout<<"Finished at: "<<std::ctime(&end_time)<<"elapsed time: "<<elapsed_seconds.count()<<"s\n";
+
+  int InputListLength = InputList.size();
+  try{
+  ss.clear();
+  ss.seekg(0,std::ios::beg);
+
+
+
+  for(int i=0; i<InputListLength; i++){
+    if(!this->search(InputList[i])){
+      std::cout<<"\u001b[31;1m"<<InputList[i]<<"\u001b[0m ";//Red
+      misspelledcount++;
+    }else{
+      std::cout<<InputList[i]<<" ";
+    }
+  }
+
+
+  std::cout<<std::endl;
+  std::string fixInput;
+  bool accounter = false;
+
+  ss.clear();
+  ss.seekg(0,std::ios::beg);
+
+  for(int j=0; j<InputListLength; j++){
+    if(!this->search(InputList[j])){
+      accounter = false;
+      std::cout<<"Fix you mistake in green: "<<std::endl;
+      for(int i=j; i<InputListLength; i++){
+        if(InputList[i] == InputList[j] && !accounter){
+          std::cout<<"\u001b[32;1m"<<InputList[j]<<"\u001b[0m ";//green
+          accounter = true;
+        }else{
+          std::cout<<InputList[i]<<" ";
+        }
+      }
+      std::cout<<": \n";
+      std::cin>>fixInput;
+      InputList[j]=fixInput;
+
+    }
+  }
+
+  std::cout<<"Final result: "<<std::endl;
+  for(int i=0; i<InputListLength; i++){
+      std::cout<<InputList[i]<<" ";
+  }
+}catch(std::string s){
+  std::cout<<"Try2: "<<s<<std::endl;
+}
+
+static double rtn[3];
+rtn[0] = misspelledcount;
+rtn[1] = GoodSuggestions2Holder.size();
+rtn[2] = std::chrono::duration<double>(elapsed).count();
+
+  // for(int i=0; i<InputListLength; i++){
+  //   std::cout<<std::endl;
+  //   if(!this->search(InputList[i])){
+  //     std::cout<<"-----------------------"<<std::endl;
+  //     std::cout<<"        Summary"<<std::endl;
+  //     std::cout<<"-----------------------"<<std::endl;
+  //     std::cout<<"Misspelled word: "<< InputList[i] <<std::endl;
+  //     std::cout<<"Number of suggestions: "<< GoodSuggestions2Holder.size() <<std::endl;
+  //
+  //
+  //   }
+  // }
+
+return rtn;
 }
 
 

@@ -44,7 +44,7 @@ class Dictionary{
 
 		void init(std::string);
 
-		void autoCorrect(std::string);
+		double* autoCorrect(std::string);
 		SUList<std::string> __autoCorrect(std::string);
 
 		void insert(std::string data);

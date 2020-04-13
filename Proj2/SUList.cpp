@@ -200,8 +200,7 @@ void SUList<DataType>::putBack(const DataType&x){
   if(!head){
     head=newNode;
     tail=newNode;
-    newNode->next=nullptr;
-    newNode->previous=nullptr;
+    return;
   }
   newNode->previous=tail;
   tail->next=newNode;
@@ -269,9 +268,9 @@ int SUList<T>::size() const{
 
 
 template<class T>
-T SUList<T>::operator[](int k){
+T& SUList<T>::operator[](int k){
 ListNode* cursor = head;
-  for(int i=1; i<k; i++){
+  for(int i=0; i<k; i++){
     cursor=cursor->next;
   }
   if(cursor){
