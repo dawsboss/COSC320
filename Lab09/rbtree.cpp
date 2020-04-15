@@ -63,7 +63,7 @@ class RBTree{
       newNode->key = k;
 
       if (root == nil){
-        printf("Inserting %d into empty tree\n", k);
+        // printf("Inserting %d into empty tree\n", k);
         root = newNode;
         newNode->parent = nil;
       } else {
@@ -78,10 +78,10 @@ class RBTree{
           }
         }
         if( k < y->key ){
-          printf("Inserting %d on the left of %d\n",k,y->key);
+          // printf("Inserting %d on the left of %d\n",k,y->key);
           y->left = newNode;
         } else {
-          printf("Inserting %d on the right of %d\n",k,y->key);
+          // printf("Inserting %d on the right of %d\n",k,y->key);
           y->right = newNode;
         }
         newNode->parent = y;
@@ -167,90 +167,102 @@ class RBTree{
     }
 
 		void RBDelete(int k){
-      TreeNode* z = Psearch(k);
-      TreeNode* y=z;
-      TreeNode* x;
-			color_t yOriginalColor = y->color;
-			if(z->left == nil){
-				x = z->right;
-				transplant(z,z->right);
-        //delete z;
-			}else if(z->right == nil){
-				x = z->left;
-				transplant(z,z->left);
-        //delete z;
-			}else{
-				y = Pminimum(z->right);
-				yOriginalColor = y->color;
-				x = y->right;
-				if(y->parent == z){
-					x->parent = y;
-				}else{
-					transplant(y, y->right);
-          // delete y;
-					y->right = z->right;
-					y->right->parent = y;
-				}
-				transplant(z, y);
-				y->left = z->left;
-				y->left->parent = y;
-				y->color = z->color;
-        delete z;
-			}
-			if(yOriginalColor == BLACK){
-				RBDeleteFix(x);
-			}
+      try{
+        TreeNode* z = Psearch(k);
+        TreeNode* y=z;
+        TreeNode* x;
+  			color_t yOriginalColor = y->color;
+  			if(z->left == nil){
+  				x = z->right;
+  				transplant(z,z->right);
+          delete z;
+  			}else if(z->right == nil){
+  				x = z->left;
+  				transplant(z,z->left);
+          delete z;
+  			}else{
+  				y = Pminimum(z->right);
+  				yOriginalColor = y->color;
+  				x = y->right;
+  				if(y->parent == z){
+  					x->parent = y;
+  				}else{
+  					transplant(y, y->right);
+            // delete y;
+  					y->right = z->right;
+  					y->right->parent = y;
+  				}
+  				transplant(z, y);
+  				y->left = z->left;
+  				y->left->parent = y;
+  				y->color = z->color;
+          delete z;
+  			}
+  			if(yOriginalColor == BLACK){
+  				RBDeleteFix(x);
+  			}
+      }catch(std::string s){
+        throw s;
+      }catch(...){
+        std::cout<<"Delete Unknown error"<<std::endl;
+      }
 		}
 
 		void RBDeleteFix(TreeNode* x){
-			while(x != root && x->color == BLACK){
-				if(x == x->parent->left){
-					TreeNode* w = x->parent->right;
-					if(w->color == RED){
-						w->color = BLACK;
-						x->parent->color - RED;
-						leftRotate(x->parent);
-						w = x->parent->right;
-					}
-					if(w->left->color == BLACK && w->right->color == BLACK){
-						w->color = RED;
-						x=x->parent;
-					}else if(w->right->color == BLACK){
-						w->left->color = BLACK;
-						w->color = RED;
-						rightRotate(w);
-						w = x->parent->right;
-					}
-					w->color = x->parent->color;
-					x->parent->color=BLACK;
-					w->right->color = BLACK;
-					leftRotate(x->parent);
-					x = root;
-				}else{
-          TreeNode* w = x->parent->left;
-          if(w->color == RED){
-            w->color = BLACK;
-            x->parent->color - RED;
+      try{
+      	while(x != root && x->color == BLACK){
+  				if(x == x->parent->left){
+  					TreeNode* w = x->parent->right;
+  					if(w->color == RED){
+  						w->color = BLACK;
+  						x->parent->color - RED;
+  						leftRotate(x->parent);
+  						w = x->parent->right;
+  					}
+  					if(w->left->color == BLACK && w->right->color == BLACK){
+  						w->color = RED;
+  						x=x->parent;
+  					}else if(w->right->color == BLACK){
+  						w->left->color = BLACK;
+  						w->color = RED;
+  						rightRotate(w);
+  						w = x->parent->right;
+  					}
+  					w->color = x->parent->color;
+  					x->parent->color=BLACK;
+  					w->right->color = BLACK;
+  					leftRotate(x->parent);
+  					x = root;
+  				}else{
+            TreeNode* w = x->parent->left;
+            if(w->color == RED){
+              w->color = BLACK;
+              x->parent->color - RED;
+              rightRotate(x->parent);
+              w = x->parent->left;
+            }
+            if(w->right->color == BLACK && w->left->color == BLACK){
+              w->color = RED;
+              x=x->parent;
+            }else if(w->left->color == BLACK){
+              w->right->color = BLACK;
+              w->color = RED;
+              leftRotate(w);
+              w = x->parent->left;
+            }
+            w->color = x->parent->color;
+            x->parent->color=BLACK;
+            w->left->color = BLACK;
             rightRotate(x->parent);
-            w = x->parent->left;
-          }
-          if(w->right->color == BLACK && w->left->color == BLACK){
-            w->color = RED;
-            x=x->parent;
-          }else if(w->left->color == BLACK){
-            w->right->color = BLACK;
-            w->color = RED;
-            leftRotate(w);
-            w = x->parent->left;
-          }
-          w->color = x->parent->color;
-          x->parent->color=BLACK;
-          w->left->color = BLACK;
-          rightRotate(x->parent);
-          x = root;
-				}
-				x->color = BLACK;
-			}
+            x = root;
+  				}
+  				x->color = BLACK;
+  			}
+      }catch(std::string s){
+        throw s;
+      }catch(...){
+        std::cout<<"Delete Unknown error"<<std::endl;
+      }
 		}
 
 
@@ -450,7 +462,7 @@ RBTree::TreeNode* const RBTree::nil = new TreeNode({0, BLACK, nullptr, nullptr, 
 
 
 //Takes a sorting algorithm calls it and prints it's meta data
-void timeFuncInsert(int A, RBTree& t){
+double timeFuncInsert(int A, RBTree& t){
   //The "auto" type determines the corret type at compile-time
   auto start=std::chrono::system_clock::now();
 
@@ -460,13 +472,13 @@ void timeFuncInsert(int A, RBTree& t){
   auto elapsed = end - start;
   std::chrono::duration<double> elapsed_seconds = end-start;
   std::time_t end_time = std::chrono::system_clock::to_time_t(end);
-  std::cout<<"Finished at: "<<std::ctime(&end_time)<<"elapsed time: "<<elapsed_seconds.count()<<"s\n";
+  //std::cout<<"Finished at: "<<std::ctime(&end_time)<<"elapsed time: "<<elapsed_seconds.count()<<"s\n";
 
-  // Times += std::chrono::duration<double>(elapsed).count();
+return std::chrono::duration<double>(elapsed).count();
 }
 
 //Takes a sorting algorithm calls it and prints it's meta data
-void timeFuncDelete(int A, RBTree& t){
+double timeFuncDelete(int A, RBTree& t){
   //The "auto" type determines the corret type at compile-time
   auto start=std::chrono::system_clock::now();
 
@@ -476,12 +488,13 @@ void timeFuncDelete(int A, RBTree& t){
   auto elapsed = end - start;
   std::chrono::duration<double> elapsed_seconds = end-start;
   std::time_t end_time = std::chrono::system_clock::to_time_t(end);
-  std::cout<<"Finished at: "<<std::ctime(&end_time)<<"elapsed time: "<<elapsed_seconds.count()<<"s\n";
+  //std::cout<<"Finished at: "<<std::ctime(&end_time)<<"elapsed time: "<<elapsed_seconds.count()<<"s\n";
 
-  // Times += std::chrono::duration<double>(elapsed).count();
+  return std::chrono::duration<double>(elapsed).count();
 }
 
 int main(int argc, char* argv[]){
+  srand (time(NULL));
   //printf("Warning! Insert-Fixup not implemented! RBT properties will not be enforced!\n");
   RBTree t;
   t.insert(3);
@@ -506,7 +519,37 @@ int main(int argc, char* argv[]){
   t.insert(1);
   t.printInOrder();
 
-  timeFuncInsert(4,t);
-  timeFuncDelete(4,t);
+  // timeFuncInsert(4,t);
+  // timeFuncDelete(4,t);
+  try{
+
+    RBTree tester;
+    double timerI=0.0;
+    double timerD=0.0;
+
+    for(int i = 10; i<10000; i+=1000){
+      for(int j=0; j<i; j++){
+        tester.insert(i+j);
+      }
+      int boi;
+      for(int j=0; j<10; j++){
+        boi = rand() % 100 + 1;
+        timerI += timeFuncInsert(boi, tester);
+
+        try{
+          timerD += timeFuncDelete(boi, tester);
+        }catch(std::string s){
+          std::cout<<boi<<" was in the tree"<<std::endl;
+        }
+      }
+      timerI/=10.0;
+      timerD/=10.0;
+      std::cout<<"# of elements: "<< i <<" Insert time: "<<timerI<<" Delete time: "<<timerD<<std::endl;
+    }
+  }catch(std::string s){
+    std::cout<<s<<std::endl;
+  }catch(...){
+    std::cout<<"Delete Unknown error"<<std::endl;
+  }
   return 0;
 }
