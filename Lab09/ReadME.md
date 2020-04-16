@@ -14,6 +14,6 @@ Insertion - O(2h) - h's best and worst case for RB trees is O(log(n)) and O(2log
 
 Deletion - O(3h) - h's best and worst cases for RB trees are O(log(n)) and O(2log(n+1)) = O(log(n)) so they are a within a constant of each other but the big O of delete is O(log(n))
 #### (c)  Use timing tools to study the cost of each of the data structure algorithms.  Does the data align with the theoretical guarantees?
-
+See graph
 #### (d)  How could the code be improved in terms of usability, efficiency, and robustness?
   I would have liked to make this more of a working class, instead of a outer shell that does it's job but could be used universally if it had some simple templating.
