@@ -10,15 +10,15 @@ You will implement a recursive algorithm to compute the inverse of a matrix, the
 #### Project:
 To run this program, you will need to first compile the code:
 
-	````
-	make
-	````
+````
+make
+````
 
 Now that our code is complied and ready to execute we can then call out function on the desired data:
 
-	````
-	./main *file*
-	````
+````
+./main *file*
+````
 *file* - This file should be accessable and capable of being oppend by fstream.
     If the file is invalid the program will not execute and will prompt you with an error message.
 
