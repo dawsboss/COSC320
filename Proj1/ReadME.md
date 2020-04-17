@@ -8,34 +8,33 @@ You will implement a recursive algorithm to compute the inverse of a matrix, the
 
 ## How to run this program
 #### Project:
-	To run this program, you will need to first compile the code:
+To run this program, you will need to first compile the code:
+
 	````
 	make
 	````
 
-	Now that our code is complied and ready to execute we can then call out function on the desired data:
+Now that our code is complied and ready to execute we can then call out function on the desired data:
+
 	````
 	./main *file*
 	````
 *file* - This file should be accessable and capable of being oppend by fstream.
-	If the file is invalid the program will not execute and will prompt you with an error message.
+    If the file is invalid the program will not execute and will prompt you with an error message.
 
 
 ##### File setup
 
 The file can have as many "problems" in it as you want or you can have each one in individual files.
 
-
-
 The file that will be given to the program should be set up like:
-
 
 
 Companies
 ---
 Matrix
 ---
-demand
+Demand
 
 
 ex:
@@ -50,17 +49,20 @@ ex:
 	20
 	34
 	80
+	
 #### Driver
-	To run this program, you will need to first compile the code:
-	````
-	make driver
-	````
+To run this program, you will need to first compile the code:
 
-	Now that our code is complied and ready to execute and test the our functions on an array of sizes of matrixies
-	````
-	./driver
-	````
-	This prints out the time it took for the functions to run.
+````
+make driver
+````
+
+Now that our code is complied and ready to execute and test the our functions on an array of sizes of matrixies
+
+````
+./driver
+````
+This prints out the time it took for the functions to run.
 
 
 ## Output
@@ -80,4 +82,4 @@ CompanyName2: # of elements needed to be made
 
 ## Analyze Driver
 
-	We can see that the subtraction and addition have the same exact amount of operations preformed. Multiplication as expected has more operations, we can expect this because it has to do the job of the adding and also go through the entire Column of one matrix just to do the one element in the first matrix. All times and number of operations are listed when the program is executed. In the driver we test all functions along with a test of the inverse, we only test this once because there is no current implementation of determanent to test if a matrix is invertable.
+We can see that the subtraction and addition have the same exact amount of operations preformed. Multiplication as expected has more operations, we can expect this because it has to do the job of the adding and also go through the entire Column of one matrix just to do the one element in the first matrix. All times and number of operations are listed when the program is executed. In the driver we test all functions along with a test of the inverse, we only test this once because there is no current implementation of determanent to test if a matrix is invertable.
