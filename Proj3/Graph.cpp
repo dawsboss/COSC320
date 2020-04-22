@@ -31,6 +31,30 @@ Graph<T>::~Graph(){
 		delete verticesParent;
 }*/
 
+//Finds all vertices that are starting points/dont have anything pointing to it
+template<class T>
+std::vector<VertexStuff<T>> Graph<T>::findStarts(){
+
+}
+
+//Finds the end of the jobs/where to stop
+template<class T>
+VertexStuff<T> Graph<T>::findEnd(){
+
+}
+
+//takes in file name and adds all the data from the file into the map
+template<class T>
+void Graph<T>::addData(std::string){
+
+}
+
+//TODO This is the hard part bois, we fins all paths and rank them 1 being the best and n being the worst
+template<class T>
+std::map<int, std::vector<T>> Graph<T>::findPath(){
+
+}
+
 //addVertex : adds a new vertex to the map - starts with no edges
 template<class T>
 void Graph<T>::addVertex(T newData){
@@ -83,55 +107,55 @@ void Graph<T>::print(){
 	}
 }
 
-//printBfs : prints out all relations and fast path form a specfic node to the others
-template<class T>
-void Graph<T>::printBfs(T B){
-	enum color_t{
-		WHITE, GREY, BLACK
-	};
-	std::map<T, color_t> color;
-	std::map<T, int> distance;
-	std::map<T, T*> parent;
-
-	for(auto i=vertices.begin(); i!=vertices.end(); ++i){
-		color.insert(std::pair<T, color_t>(i->first, WHITE));
-		distance.insert(std::pair<T, int>(i->first, -1));
-		parent.insert(std::pair<T, T*>(i->first, nullptr));
-	}
-	auto S = vertices.find(B);
-	color.find(B)->second = GREY;
-	distance.find(B)->second = 0;
-	parent.find(B)->second = nullptr;
-
-	std::queue<T> q;
-	q.push(B);
-	while(!q.empty()){
-		T U = q.front();q.pop();
-		for(auto j=vertices[U].begin(); j!=vertices[U].end(); ++j){
-				std::cout<<"Node "<<U<<" edge: "<<*j<<std::endl;
-			if(color.find(*j)->second == WHITE){
-				color.find(*j)->second = GREY;
-				distance.find(*j)->second = distance.find(U)->second +1;
-				parent.find(*j)->second = &U;
-				std::cout<<parent.find(*j)->first<<"'s parent is "<<U<<" or "<<&U<<std::endl;
-				q.push(*j);
-			}
-			color.find(*j)->second = BLACK;
-		}
-	}
-
-
-
-	std::cout<<"Starting at: "<<B<<std::endl;
-	for(auto i=vertices.begin(); i!=vertices.end(); ++i){
-		if(parent[i->first] == nullptr){
-				std::cout<<"Node: "<<i->first<< " distance: "<<distance[i->first]<< " parent: No Parents"<<std::endl;
-		}else{
-		std::cout<<"Node: "<<i->first<< " distance: "<<distance[i->first]<< " parent: "<<*parent[i->first]<<std::endl;
-		}
-	}
-
-}
+// //printBfs : prints out all relations and fast path form a specfic node to the others
+// template<class T>
+// void Graph<T>::printBfs(T B){
+// 	enum color_t{
+// 		WHITE, GREY, BLACK
+// 	};
+// 	std::map<T, color_t> color;
+// 	std::map<T, int> distance;
+// 	std::map<T, T*> parent;
+//
+// 	for(auto i=vertices.begin(); i!=vertices.end(); ++i){
+// 		color.insert(std::pair<T, color_t>(i->first, WHITE));
+// 		distance.insert(std::pair<T, int>(i->first, -1));
+// 		parent.insert(std::pair<T, T*>(i->first, nullptr));
+// 	}
+// 	auto S = vertices.find(B);
+// 	color.find(B)->second = GREY;
+// 	distance.find(B)->second = 0;
+// 	parent.find(B)->second = nullptr;
+//
+// 	std::queue<T> q;
+// 	q.push(B);
+// 	while(!q.empty()){
+// 		T U = q.front();q.pop();
+// 		for(auto j=vertices[U].begin(); j!=vertices[U].end(); ++j){
+// 				std::cout<<"Node "<<U<<" edge: "<<*j<<std::endl;
+// 			if(color.find(*j)->second == WHITE){
+// 				color.find(*j)->second = GREY;
+// 				distance.find(*j)->second = distance.find(U)->second +1;
+// 				parent.find(*j)->second = &U;
+// 				std::cout<<parent.find(*j)->first<<"'s parent is "<<U<<" or "<<&U<<std::endl;
+// 				q.push(*j);
+// 			}
+// 			color.find(*j)->second = BLACK;
+// 		}
+// 	}
+//
+//
+//
+// 	std::cout<<"Starting at: "<<B<<std::endl;
+// 	for(auto i=vertices.begin(); i!=vertices.end(); ++i){
+// 		if(parent[i->first] == nullptr){
+// 				std::cout<<"Node: "<<i->first<< " distance: "<<distance[i->first]<< " parent: No Parents"<<std::endl;
+// 		}else{
+// 		std::cout<<"Node: "<<i->first<< " distance: "<<distance[i->first]<< " parent: "<<*parent[i->first]<<std::endl;
+// 		}
+// 	}
+//
+// }
 
 
 

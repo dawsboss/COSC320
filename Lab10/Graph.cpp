@@ -50,7 +50,7 @@ void Graph<T>::addEdge(T Parent, T child){
 			for(auto j=vertices[Parent].begin(); j!=vertices[Parent].end(); ++j){
 				//std::cout<<*j<<" ";
 				if(*j==child){
-					std::cout<<" REE ";
+					//std::cout<<" REE ";
 					inAlready=true;
 					break;
 				}
@@ -91,17 +91,17 @@ void Graph<T>::printBfs(T B){
 	};
 	std::map<T, color_t> color;
 	std::map<T, int> distance;
-	std::map<T, T*> parent;
+	std::map<T, T> parent;
 
 	for(auto i=vertices.begin(); i!=vertices.end(); ++i){
 		color.insert(std::pair<T, color_t>(i->first, WHITE));
 		distance.insert(std::pair<T, int>(i->first, -1));
-		parent.insert(std::pair<T, T*>(i->first, nullptr));
+		//parent.insert(std::pair<T, T*>(i->first, nullptr));
 	}
 	auto S = vertices.find(B);
 	color.find(B)->second = GREY;
 	distance.find(B)->second = 0;
-	parent.find(B)->second = nullptr;
+	//parent.find(B)->second = nullptr;
 
 	std::queue<T> q;
 	q.push(B);
@@ -112,8 +112,9 @@ void Graph<T>::printBfs(T B){
 			if(color.find(*j)->second == WHITE){
 				color.find(*j)->second = GREY;
 				distance.find(*j)->second = distance.find(U)->second +1;
-				parent.find(*j)->second = &U;
-				std::cout<<parent.find(*j)->first<<"'s parent is "<<U<<" or "<<&U<<std::endl;
+				parent[*j] = U;
+				//parent.find(*j)->second = &vertices.find(U)->first;
+				//std::cout<<parent.find(*j)->first<<"'s parent is "<<U<<" or "<<&U<<std::endl;
 				q.push(*j);
 			}
 			color.find(*j)->second = BLACK;
@@ -124,10 +125,10 @@ void Graph<T>::printBfs(T B){
 
 	std::cout<<"Starting at: "<<B<<std::endl;
 	for(auto i=vertices.begin(); i!=vertices.end(); ++i){
-		if(parent[i->first] == nullptr){
+		if(parent.find(i->first) == parent.end()){
 				std::cout<<"Node: "<<i->first<< " distance: "<<distance[i->first]<< " parent: No Parents"<<std::endl;
 		}else{
-		std::cout<<"Node: "<<i->first<< " distance: "<<distance[i->first]<< " parent: "<<*parent[i->first]<<std::endl;
+				std::cout<<"Node: "<<i->first<< " distance: "<<distance[i->first]<< " parent: "<<parent[i->first]<<std::endl;
 		}
 	}
 
