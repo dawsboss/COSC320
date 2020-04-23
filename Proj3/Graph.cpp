@@ -33,13 +33,13 @@ Graph<T>::~Graph(){
 
 //Finds all vertices that are starting points/dont have anything pointing to it
 template<class T>
-std::vector<VertexStuff<T>> Graph<T>::findStarts(){
+std::vector<typename Graph<T>::VertexStuff> Graph<T>::findStarts(){
 
 }
 
 //Finds the end of the jobs/where to stop
 template<class T>
-VertexStuff<T> Graph<T>::findEnd(){
+typename Graph<T>::VertexStuff Graph<T>::findEnd(){
 
 }
 
@@ -49,17 +49,12 @@ void Graph<T>::addData(std::string){
 
 }
 
-//TODO This is the hard part bois, we fins all paths and rank them 1 being the best and n being the worst
-template<class T>
-std::map<int, std::vector<T>> Graph<T>::findPath(){
-
-}
 
 //addVertex : adds a new vertex to the map - starts with no edges
 template<class T>
 void Graph<T>::addVertex(T newData){
 	if(vertices.find(newData) == vertices.end()){ //will check if the element is already there TODO broken with find()
-		vertices.insert(std::pair<T, std::vector<T>>(newData, std::vector<T>()));
+		vertices.insert(std::pair<T, std::vector<VertexStuff>>(newData, std::vector<VertexStuff>()));
 	}else{
 		std::cout<<newData<<" was already in the list!\n";
 	}
@@ -67,20 +62,20 @@ void Graph<T>::addVertex(T newData){
 
 //addEdge : This will give the parent node a edge to the child node
 template<class T>
-void Graph<T>::addEdge(T Parent, T child){
+void Graph<T>::addEdge(T Parent, T child, double price){
 	if(vertices.find(Parent) != vertices.end()){ //if there is an element to point from
 		if(vertices.find(child) != vertices.end()){ //if there is an element to point too
 			bool inAlready = false;
 			for(auto j=vertices[Parent].begin(); j!=vertices[Parent].end(); ++j){
 				//std::cout<<*j<<" ";
-				if(*j==child){
-					std::cout<<" REE ";
+				if((*j).data==child){
+					//std::cout<<" REE ";
 					inAlready=true;
 					break;
 				}
 			}
 			if(!inAlready){
-				vertices[Parent].push_back(child);
+				vertices[Parent].push_back(VertexStuff(child, price));
 			}else{
 				std::cout<<"Edge already included!"<<std::endl;
 			}
@@ -101,7 +96,7 @@ void Graph<T>::print(){
 			std::cout<<"Vector: "<<i->first<<" | Point to: ";
 
 			for(auto j=i->second.begin(); j!=i->second.end(); ++j){
-				std::cout<<*j<<" ";
+				std::cout<<(*j).data<<"'s' cost: "<<(*j).cost<<" | ";
 			}
 			std::cout<<std::endl;
 	}

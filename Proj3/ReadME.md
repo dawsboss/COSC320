@@ -1,21 +1,54 @@
 ### Grant Dawson
 
-# Lab10 : Graphs and BFS algorithm
+# Project 3 : Graphs for job scheduling
 
-### In this lab you will focus on the following objectives:
-*  Review basic graph representations and operations
-*  Develop familiarity with the c++ standard library tools.
-*  Solve the problems of implementing abstract algorithms with programming languages.
-## Questions:
+### During this project, you will
+*  be exposed to the breadth of problem domains in graph theory and computer science
+*  develop the skills needed to research a problem, understand its motivations and potential solutions
+*  be exposed to the genesis of a problem and its historical solutions
+*  practice communicating complicated material in computer science and applied mathematics
 
-#### (a)  Summarize your approach to the problem, and how your code addresses the abstractions needed.
-  I started coding this lab by making the base of the class work before touching the BFS algorithm. I made a map that maps the data to a vector of the given data. This is to hold the vertex and what other vertices it points to. Once I had this idea down and done with a print function, I attempted the BFS print. I stated by making maps that hold the meta data needed for the algorithm to operate. These maps are the same size as the vertices map because each vertex has it's own metadata. Which this was strange because the loop to fill on map could be used for all of them and the loop does not use any data from the maps being filled. This was a foreign idea to me but I pressed on. I came to the actual algorithm and began catching myself using operator[] and find interchangeable which this took some research to find out why that is a bad practice and an error. Finally bring me to the print where similar to the loop that filled maps it didn't use anything that was actually being printed. Now looking bakc this although weird makes complete sense because the maps all held the same number of vertices no mater what just the second item in the pairs would differ.
+TODO THIS BELOW NEEDS UPDATING===================================================
 
-#### (b)  What is the theoretical time complexity of your algorithms (best and worst case), in terms of the size of the tree?  Be sure to vary the parameters enough to use the observations to answer the next questions!
-  * addVertex : 
-  * addEdge :
-  * print :
-  * printBFS :
+## How to run this program
+#### Project
+To run this program, you will need to first compile the code:
 
-#### (c)  How could the code be improved in terms of usability, efficiency, and robustness?
-  I wish I had caught myself earlier on in my BFS implementation with my mess of .find() function calls and operator[] calls and stuck to one or the other (I would rather have operator []). I also could clean some of these functions if statements checking if the function was called on valid data.
+````
+make
+````
+
+Now that our code is complied and ready to execute call:
+
+````
+./main
+````
+The actual input comes from once the prgram is running you w0ill have the opertunity to input a sentence into the console
+
+## Output
+
+If there are any mis-spelled words the the out put will be:
+    "*Word*" was detected as misspelled, suggestions for a one letter replace:
+    *Suggestions*
+
+		Suggestion for a two letter replace:
+		*Suggestion*
+
+		.
+		.
+		.
+
+
+
+Otherwise there was nothing spelled wrong and there will be no output!
+
+## Post-Project Analyzing
+
+#### Approach
+I approached this problem with a sense of mobility. The actual main required only 3 lines of code. It requires you too initilizes then call a init function that will make a hash table with the given text documents dictionary. Finally you can call the autoCorrect function with the words that would would like to check. This makes it extremly easy for the user to implement the Dictionary class and makes the main really clean. Now saying this, the Dictionary relies on several libraries, so there are ups and downs.
+
+#### Interesting function design
+The autoCorrect function is extremly interesting because it can take any type of strings and any length and is able to check each word.This allows for a very clean main, only draw back could be is if the user wants to change the print they will have to go to Dictionary.cpp
+
+#### Deficiencies/Improvements
+With what I know now I would have liked to add a clean autoCorrect function so that if the user would have liked to change the output it would be easier to read and do so. I am sure there are also more efficient ways of doing the same thing with less moving of linked lists and I would have liked to explore these.

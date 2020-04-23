@@ -130,6 +130,8 @@ int main(){
 	d.addEdge('l','k');
 	d.addEdge('k','l');
 
+	//d.addVertex('t'); edge case
+
 	d.print();
 
 	std::cout<<std::endl;
