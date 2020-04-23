@@ -20,7 +20,7 @@ class Graph{
 			}
 		};
 		std::map<T, std::vector<VertexStuff>> vertices;
-		//std::map<T, std::vector<T>> verticesParent;
+		std::map<T, std::vector<T>> verticesParent;
 
 	public:
 		Graph();
@@ -28,10 +28,10 @@ class Graph{
 		//Graph& operator=(Graph&);
 		//~Graph();
 
-		std::vector<typename Graph<T>::VertexStuff> findStarts();//Finds all vertices that are starting points/dont have anything pointing to it
-		typename Graph<T>::VertexStuff findEnd(); //Finds the end of the jobs/where to stop
+		std::vector<T> findStarts();//Finds all vertices that are starting points/dont have anything pointing to it
+		std::vector<T> findEnd(); //Finds the end of the jobs/where to stop
 
-		void addData(std::string);//takes in file name and adds all the data from the file into the map
+		//void addData(std::string);//takes in file name and adds all the data from the file into the map
 
 		//std::map<int, std::vector<T>> findPath();//TODO This is the hard part bois, we fins all paths and rank them 1 being the best and n being the worst
 

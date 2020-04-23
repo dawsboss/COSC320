@@ -15,7 +15,7 @@ int main(){
 	std::cout<<std::endl;
 
 	t.addVertex(7);
-	t.addEdge(7,7,1);
+	//t.addEdge(7,7,1);
 	t.addEdge(7,5,1);
 	t.addEdge(7,10,1);
 	t.print();
@@ -26,6 +26,17 @@ int main(){
 	t.addVertex(15);
 	t.addEdge(7,15,1);
 	t.addEdge(15,11,1);
+
+
+	std::vector<int> re= t.findEnd();
+	for(auto i=re.begin(); i!=re.end(); ++i){
+		std::cout<<*i<<std::endl;
+	}
+
+	std::vector<int> r= t.findStarts();
+	for(auto i=r.begin(); i!=r.end(); ++i){
+		std::cout<<*i<<std::endl;
+	}
 
 	std::cout<<std::endl;
 
@@ -135,8 +146,25 @@ int main(){
 	d.print();
 
 	std::cout<<std::endl;
+	std::cout<<"New stuff"<<std::endl;
+	std::cout<<std::endl;
 
-	//d.printBfs('a');
+	std::vector<char> reee= d.findEnd();
+	for(auto i=reee.begin(); i!=reee.end(); ++i){
+		std::cout<<*i<<std::endl;
+	}
+
+	std::vector<char> ree= d.findStarts();
+	for(auto i=ree.begin(); i!=ree.end(); ++i){
+		std::cout<<*i<<std::endl;
+	}
+
+	std::cout<<"End"<<std::endl;
+
+	//Graph<int> tester;
+	//tester.addData("data.txt");
+
+
 
 
 

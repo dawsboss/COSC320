@@ -33,21 +33,74 @@ Graph<T>::~Graph(){
 
 //Finds all vertices that are starting points/dont have anything pointing to it
 template<class T>
-std::vector<typename Graph<T>::VertexStuff> Graph<T>::findStarts(){
-
+std::vector<T> Graph<T>::findStarts(){
+	std::vector<T> rtn;
+	for( auto i=verticesParent.begin(); i!=verticesParent.end(); ++i){
+		if(i->second.empty()){
+			rtn.push_back(i->first);
+			std::cout<<"start: "<<i->first<<std::endl;
+		}
+	}
+	return rtn;
 }
 
 //Finds the end of the jobs/where to stop
 template<class T>
-typename Graph<T>::VertexStuff Graph<T>::findEnd(){
-
+std::vector<T> Graph<T>::findEnd(){
+	std::vector<T> rtn;
+	for( auto i=vertices.begin(); i!=vertices.end(); ++i){
+		if(i->second.begin() == i->second.end()){
+			rtn.push_back(i->first);
+			std::cout<<"end: "<<i->first<<std::endl;
+		}
+	}
+	return rtn;
 }
 
 //takes in file name and adds all the data from the file into the map
-template<class T>
-void Graph<T>::addData(std::string){
-
-}
+// template<class T>
+// void Graph<T>::addData(std::string s){
+// 	std::fstream readIn;
+// 	std::string holder;
+//
+// //Catch if the string was given bad
+// 	try{
+// 		readIn.open(s);
+// 		if(!readIn.is_open()){
+// 			std::cout<<"File couldn't open/doesn't exist! \n";
+// 			return;
+// 		}
+// 	}catch(...){
+// 		//errors out if we have nothing to open
+// 		std::cout<<"File couldn't open/doesn't exist! \n";
+// 		return;
+// 	}
+//
+// //The readIn is open and good
+// 	for(int i=0; readIn.peek() != '-'; i++){//Reads in the vertices
+// 		readIn >> holder;
+// 		addVertex(holder);
+// 	}
+//
+// 	readIn.ignore(5,'\n');//Get out of vertices section
+//
+// 	T parent;
+// 	T child;
+// 	int cost;
+// 	while(readIn >> holder){//Runs through edge stuff
+// 		parent = holder[1];
+// 		child = holder[3];
+// 		cost = holder[5];
+// 		// for(int i=0; i<holder.length(); i++){
+// 		// 	if(holder[i]=='('||holder[i]==','||holder[i]==')'||holder[i]==' '){
+// 		// 		continue;
+// 		// 	}
+// 		// 	parent=child;
+// 		// 	child=holder[i];
+// 		// }
+// 		addEdge(parent, child, cost);
+// 	}
+// }
 
 
 //addVertex : adds a new vertex to the map - starts with no edges
@@ -55,6 +108,7 @@ template<class T>
 void Graph<T>::addVertex(T newData){
 	if(vertices.find(newData) == vertices.end()){ //will check if the element is already there TODO broken with find()
 		vertices.insert(std::pair<T, std::vector<VertexStuff>>(newData, std::vector<VertexStuff>()));
+		verticesParent.insert(std::pair<T, std::vector<T>>(newData, std::vector<T>()));
 	}else{
 		std::cout<<newData<<" was already in the list!\n";
 	}
@@ -75,7 +129,10 @@ void Graph<T>::addEdge(T Parent, T child, double price){
 				}
 			}
 			if(!inAlready){
+				std::cout<<Parent<<" points to "<<child<<std::endl;
 				vertices[Parent].push_back(VertexStuff(child, price));
+				std::cout<<child<<" is pointed to by "<<Parent<<std::endl;
+				verticesParent[child].push_back(Parent);
 			}else{
 				std::cout<<"Edge already included!"<<std::endl;
 			}
@@ -91,12 +148,22 @@ void Graph<T>::addEdge(T Parent, T child, double price){
 //print : prints out all verticies and where they point
 template<class T>
 void Graph<T>::print(){
-	int size = vertices.size();
-		for( auto i=vertices.begin(); i!=vertices.end(); ++i){
-			std::cout<<"Vector: "<<i->first<<" | Point to: ";
+	for( auto i=vertices.begin(); i!=vertices.end(); ++i){
+		std::cout<<"Vector: "<<i->first<<" | Point to: ";
 
 			for(auto j=i->second.begin(); j!=i->second.end(); ++j){
 				std::cout<<(*j).data<<"'s' cost: "<<(*j).cost<<" | ";
+			}
+			std::cout<<std::endl;
+	}
+
+	std::cout<<"parent: "<<std::endl;
+
+	for( auto i=verticesParent.begin(); i!=verticesParent.end(); ++i){
+		std::cout<<"Vector: "<<i->first<<" | Is pointed to by: ";
+
+			for(auto j=i->second.begin(); j!=i->second.end(); ++j){
+				std::cout<<(*j)<<" | ";
 			}
 			std::cout<<std::endl;
 	}
