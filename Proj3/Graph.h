@@ -11,16 +11,26 @@ template<class T>
 class Graph{
 	private:
 		struct VertexStuff{
+			int id;
 			T data;
 			double cost;
+			std::vector<int> vertices;
+			std::vector<int> verticesParent;
 
-			VertexStuff(T d, double c){
+			VertexStuff(T d, double c, int i){
+				id = i;
 				data = d;
 				cost = c;
+				vertices = std::vector<int>();
+				verticesParent = std::vector<int>();
 			}
 		};
-		std::map<T, std::vector<VertexStuff>> vertices;
-		std::map<T, std::vector<T>> verticesParent;
+		int ID = 1;
+
+		std::map<int, VertexStuff> v;
+		//std::vector<VertexStuff> v;
+		//std::map<int, std::vector<int>> vertices;
+		//std::map<int, std::vector<int>> verticesParent;
 
 	public:
 		Graph();
@@ -35,8 +45,8 @@ class Graph{
 
 		//std::map<int, std::vector<T>> findPath();//TODO This is the hard part bois, we fins all paths and rank them 1 being the best and n being the worst
 
-		void addVertex(T);
-		void addEdge(T,T,double);
+		void addVertex(T,double);
+		void addEdge(T,T);
 		void print();
 		// void printBfs(T);
 };

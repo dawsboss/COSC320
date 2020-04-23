@@ -16,11 +16,11 @@
     2. addEdge : This will run in O(e), I run another simple command to add the data to the maps vector. There are several small checks to makes sure that the edge that is being given the new edge is real and that the new edge already exists. But the heavy hitting test comes from when we want to make sure we are not repeating ourselves with the same edges for vertices.
       * Worst case: O(n) - This comes from when the "new" edge is actually new and we need to add it.
       * Best case: O(1) - This comes form when we see right off the start that the "new" edge isn't new at all.
-    3. print : This will run O(v*e) is the fancy way of saying it. I run through ever node and print it and it's other vertices that is points to.
+    3. print : This will run O(v+e) is the fancy way of saying it. I run through ever node and print it and it's other vertices that is points to.
       * Worst case: O(n^2) - This comes from the case that all vertices have an edge to ever vertex in the graph. So there will be n elements with n items in it's vector of edges.
       * Best case: O(n) - This comes from the case that all vertices do not have any edges
-    4. printBFS : This runs O() is the fancy way of saying it. I run through every node only once in the while loop but I then  ccheck each nodes edges/children to see if they have been accounted for and if not add them to the list of stuff that needs to be accounted for.
-      * Worst case: O(n^2) - This comes from the case that all vertices have an edge to ever vertex in the graph. So there will be n elements with n items in it's vector of edges. 
+    4. printBFS : This runs O(v+e) is the fancy way of saying it. I run through every node only once in the while loop but I then check each nodes edges/children to see if they have been accounted for and if not add them to the list of stuff that needs to be accounted for.
+      * Worst case: O(n^2) - This comes from the case that all vertices have an edge to ever vertex in the graph. So there will be n elements with n items in it's vector of edges.
       * Best case: O(n) - This comes from the case that all vertices do not have any edges
 
 #### (c)  How could the code be improved in terms of usability, efficiency, and robustness?
