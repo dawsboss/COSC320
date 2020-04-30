@@ -2,9 +2,9 @@
 
 
 int main(){
-	Graph<int> t(false);
+	Graph<int> t(true);
 	t.addVertex(5,1);
-	t.addEdge(5,5);
+	//t.addEdge(5,5);
 	//t.print();
 
 	std::cout<<std::endl;
@@ -41,12 +41,20 @@ int main(){
 	}
 
 	std::cout<<std::endl;
+	t.topologicalSort();
+	std::cout<<std::endl;
 
+	t.SCC();
 	//t.printBfs(7);
 
 
+	std::cout<<std::endl;
+	std::cout<<"Next graph"<<std::endl;
+	std::cout<<std::endl;
 
 
+
+	std::cout<<std::endl;
 	Graph<char> d(true);
 	d.addVertex('a',1);
 	d.addVertex('b',1);
@@ -164,6 +172,76 @@ int main(){
 	std::cout<<std::endl;
 
 	d.topologicalSort();
+
+	std::cout<<std::endl;
+
+	d.SCC();
+
+	std::cout<<std::endl;
+	std::cout<<"Read in FILE"<<std::endl;
+	std::cout<<std::endl;
+
+
+
+
+	std::fstream readIn;
+	readIn.open("data.txt");
+	std::string holder, parent, child, vertex, dir;
+
+	std::getline(readIn, dir);//get the dir or not true or false
+	Graph<std::string> fileLad;
+	if(dir == "false"){
+		fileLad.initDIR(false);
+	}else{
+		fileLad.initDIR(true);
+	}
+
+	readIn.ignore(5,'\n');//Makes sure we get to the vertices saftley
+
+	for(int i=0; readIn.peek() != '-'; i++){
+		std::getline(readIn, vertex);
+		std::cout<<vertex<<std::endl;
+		fileLad.addVertex(vertex, 1);//We can ignore the 1 here just somehting extra I added to allow for costs of the nodes
+	}
+
+	fileLad.print();
+
+	readIn.ignore(5,'\n');//Makes sure we get to the edges saftley
+
+	while(readIn>>holder){//This only works for things that look like: (a,b)
+		//std::cout<<holder<<std::endl;
+		holder.erase(0,1);//delete first '('
+		holder.erase(holder.length()-1,1);//deletes the last ')'
+
+		//std::cout<<holder<<std::endl;
+
+		child=holder;
+		parent="";
+
+		for(int i=0; holder[i]!=','; i++){
+			child.erase(0,1);
+		}
+		child.erase(0,1);//deletes ','
+
+		for(int i=0; holder[i]!=','; i++){
+			parent+=holder[i];
+		}
+		fileLad.addEdge(parent, child);
+	}
+
+	fileLad.print();
+
+	std::cout<<std::endl;
+
+	fileLad.topologicalSort();
+
+	std::cout<<std::endl;
+	std::cout<<"SCC: "<<std::endl;
+	std::cout<<std::endl;
+
+	fileLad.SCC();
+
+
 
 	std::cout<<"End"<<std::endl;
 

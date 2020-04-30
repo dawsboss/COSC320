@@ -24,6 +24,11 @@ class Graph{
 				vertices = std::vector<int>();
 				verticesParent = std::vector<int>();
 			}
+			VertexStuff(){
+				//oof
+				// vertices = std::vector<int>();
+				// verticesParent = std::vector<int>();
+			}
 		};
 		int ID = 1;
 

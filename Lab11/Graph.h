@@ -2,15 +2,16 @@
 #define GRAPH_H
 
 #include <iostream>
-#include <map>
-#include <vector>
-#include <queue>
-#include <fstream>
+#include <map>//stdmap
+#include <vector>//std::vector
+#include <queue>//std::queue
+#include <algorithm>//std::sort
+#include <fstream>//read in File
 
 template<class T>
 class Graph{
 	private:
-		bool dir;//T == Dirrected | F == UnDirrected
+		bool dir=true;//T == Dirrected | F == UnDirrected
 		bool DFSneeded=false;//If DFS saved it correct or not True == needs update/ False == all good
 		int time=0;
 		bool Acyclic=true;
@@ -28,7 +29,6 @@ class Graph{
 			int P;
 			int start;
 			int finish;
-			bool visited;
 
 			VertexStuff(T d, double c, int i){//constructor for new edges\
 				id = i;
@@ -38,7 +38,6 @@ class Graph{
 				verticesParent = std::vector<int>();
 				color = WHITE;
 				P=-1;
-				visited=false;
 			}
 			VertexStuff(){//Needed for map RB_tree
 			}
@@ -47,10 +46,12 @@ class Graph{
 
 		std::map<int, VertexStuff> v;//main map that holds all nodes with their meta data
 
-		void PaddEdge(int,int);//Private edittion of adding edge
+		void PaddEdge(int,int);//Private addition of adding edge
 
 	public:
 
+		Graph();//This is the same as the Graph(bool) but it just doesn't init dir NOTE: This is extremely unsafe to use... if you do use it make sure you init bool dir
+		void initDIR(bool);//This will init dir to give in bool
 		Graph(bool);//T == Dirrected | F == UnDirrected
 
 		void graphType();
@@ -65,6 +66,8 @@ class Graph{
 		void DFS();
 		void DFS_Visit(int);
 		void topologicalSort();
+		void SCCDFS_Visit(int node);
+		void SCC();
 };
 
 #include "Graph.cpp"

@@ -34,6 +34,7 @@ std::vector<T> Graph<T>::findEnd(){
 template<class T>
 void Graph<T>::addVertex(T newData, double price){
 		v.insert(std::make_pair(ID, VertexStuff(newData, price, ID)));
+		ID++;
 		// vertices.insert(std::make_pair(ID, std::vector<int>()));
 		// verticesParent.insert(std::make_pair(ID++, std::vector<int>));
 }
@@ -44,22 +45,25 @@ void Graph<T>::addEdge(T Parent, T child){
 	int p=-1, c=-1;
 	bool haveP = false, haveC = true;
 	for(auto i=v.begin(); i!=v.end(); ++i){
-		if(v[i].data == Parent){
-			p = i;
+		if(v[i->first].data == Parent){
+			p = i->first;
+			haveP = true;
 		}
-		if(v[i] .data == child){
-			c = i;
+		if(v[i->first].data == child){
+			c = i->first;
+			haveC = true;
 		}
 		if(haveP && haveC){
-			break;
+			v[p].vertices.push_back(c);
+			v[c].verticesParent.push_back(p);
+			return;
 		}
 	}
-	if(p==-1 || c==-1){
-		std::cout<<"Couldn;t add edge, parent or child invalid"<<std::endl;
+
+		std::cout<<"Couldn't add edge, parent or child invalid"<<std::endl;
 		return;
-	}
-	v[p].vertices.push_back(c);
-	v[c].verticesParent.push_back(p);
+
+
 
 
 
@@ -98,9 +102,9 @@ void Graph<T>::addEdge(T Parent, T child){
 template<class T>
 void Graph<T>::print(){
 	for(auto i=v.begin(); i!=v.end(); ++i){
-		std::cout<<"Vector: "<<v[i].data<<"Points to: ";
-		for(auto j=v[i].vertices.begin(); j!=v[i].vertices.end(); ++j){
-			std::cout<<v[j].data<<"'s' cost: "<<v[j].cost<<" ID: "<<j<<" | ";
+		std::cout<<"Vector: "<<v[i->first].data<<" points to: ";
+		for(auto j=v[i->first].vertices.begin(); j!=v[i->first].vertices.end(); ++j){
+			std::cout<<v[*j].data<<" cost: "<<v[*j].cost<<" ID: "<<i->first<<" | ";
 		}
 		std::cout<<std::endl;
 	}
@@ -110,10 +114,11 @@ void Graph<T>::print(){
 	std::cout<<std::endl;
 
 	for(auto i=v.begin(); i!=v.end(); ++i){
-		std::cout<<"Vector: "<<v[i].data<<"Is pointed to by: ";
-		for(auto j=v[i].verticesParent.begin(); j!=v[i].verticesParent.end(); ++j){
-			std::cout<<v[j].data<<"'s' cost: "<<v[j].cost<<" ID: "<<j<<" | ";
+		std::cout<<"Vector: "<<v[i->first].data<<" is pointed to by: ";
+		for(auto j=v[i->first].verticesParent.begin(); j!=v[i->first].verticesParent.end(); ++j){
+			std::cout<<v[*j].data<<"'s' cost: "<<v[*j].cost<<" ID: "<<i->first<<" | ";
 		}
+		std::cout<<std::endl;
 	}
 
 

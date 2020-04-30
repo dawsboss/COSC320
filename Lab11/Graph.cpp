@@ -3,6 +3,14 @@ template<class T>
 Graph<T>::Graph(bool d){
 	dir = d;
 }
+template<class T>
+Graph<T>::Graph(){
+}
+
+template<class T>
+void Graph<T>::initDIR(bool d){
+	dir = d;
+}
 
 //Prints back what type of a graph the current session is set to
 template<class T>
@@ -53,9 +61,11 @@ void Graph<T>::addVertex(T newData, double price){
 template<class T>
 void Graph<T>::PaddEdge(int Parent, int child){
 	if(Parent>=ID || child>=ID || Parent<=0 || child<=0){//Is parent or child invalid?
-		std::cout<<"Parent or child invalid/too big!"<<std::endl;
+		std::cout<<"Parent or child invalid/too big!"<<std::endl;// "<<Parent<<" "<<child
 		return;
 	}
+
+	DFSneeded=true;
 
 
 	for(auto i=v[Parent].vertices.begin(); i!=v[Parent].vertices.end(); ++i){
@@ -73,10 +83,12 @@ void Graph<T>::PaddEdge(int Parent, int child){
 }
 
 //addEdge : adds edge by value
-template<class T>
+template<class T>//TODO fix this stuff (5,5)edge case
 void Graph<T>::addEdge(T Parent, T child){
 	int p=-1, c=-1;
+	 //std::cout<<"Parent/child "<<Parent<<" "<<child<<"\n";
 	for(auto i=v.begin(); i!=v.end(); ++i){
+		// std::cout<<"i->second.data "<<i->first<<" "<<i->second.data<<std::endl;
 		if(i->second.data == Parent)
 			p=i->first;
 		if(i->second.data == child)
@@ -91,11 +103,11 @@ void Graph<T>::print(){
 	DFS();
 	std::cout<<"The graph is ";
 	if(!Acyclic)
-		std::cout<<" NOT ";
-	std::cout<<" Acyclic and is ";
+		std::cout<<"NOT ";
+	std::cout<<"Acyclic and is ";
 	if(!DAG)
-		std::cout<<" NOT ";
-	std::cout<<" a DAG and is ";
+		std::cout<<"NOT ";
+	std::cout<<"a DAG and is ";
 	graphType();
 
 	std::cout<<std::endl;
@@ -125,7 +137,10 @@ template<class T>
 void Graph<T>::DFS(){
 	if(DFSneeded){
 		for(auto i=v.begin(); i!=v.end(); ++i){
-			v[i->first].visited=false;
+			v[i->first].color=WHITE;
+		}
+		time=0;
+		for(auto i=v.begin(); i!=v.end(); ++i){
 			if(v[i->first].color == WHITE)
 				DFS_Visit(i->first);
 		}
@@ -146,9 +161,11 @@ void Graph<T>::DFS(){
 template<class T>
 void Graph<T>::DFS_Visit(int node){
 	time++;
+	//std::cout<<"time: "<<time<<" node: "<<node<<" "<<v[node].data<<std::endl;
 	v[node].start=time;
 	v[node].color=GREY;
 	for(auto i=v[node].vertices.begin(); i!=v[node].vertices.end(); ++i){
+		//std::cout<<"!!!!"<<v[node].color<<" node: "<<node<<" "<<v[node].data<<std::endl;
 		if(v[*i].color == GREY)
 			Acyclic=false;
 		if(v[*i].color == WHITE){
@@ -158,22 +175,59 @@ void Graph<T>::DFS_Visit(int node){
 	}
 	v[node].color=BLACK;
 	time++;
+	//std::cout<<"====time: "<<time<<" node: "<<node<<" "<<v[node].data<<std::endl;
 	v[node].finish=time;
 }
 
 template<class T>
 void Graph<T>::topologicalSort(){
-	int smallest;
 	DFS();
+	if(!DAG){
+		std::cout<<"Graph is not a DAG! Can't topologicalSort..."<<std::endl;
+		return;
+	}
+
+	std::map<int,T> topolist;
+
 	for(auto i=v.begin(); i!=v.end(); ++i){
-		smallest=-1;
-		for(auto j=v.begin(); j!=v.end(); ++j){
-			if(!v[j->first].visited && v[j->first].finish < smallest){
-				smallest=j->first;
-				v[j->first].visited=true;
-			}
-		}
-		std::cout<<v[smallest].data<<" ";
+		topolist.insert(std::pair<int,T>(i->second.finish,i->second.data));
+	}
+
+	for(auto i=topolist.rbegin(); i!=topolist.rend(); ++i){
+		std::cout<<i->second<<" time "<<i->first<<"| ";
 	}
 	std::cout<<std::endl;
+}
+
+template<class T>
+void Graph<T>::SCC(){
+	DFS();
+	std::map<int,int> topolist;
+	for(auto i=v.begin(); i!=v.end(); ++i){
+		topolist.insert(std::pair<int,int>(i->second.finish,i->first));
+		v[i->first].color=WHITE;
+	}
+	time=0;
+	for(auto i=topolist.rbegin(); i!=topolist.rend(); ++i){
+		//std::cout<<"Checking: "<<i->second<<std::endl;
+		if(v[i->second].color == WHITE){
+			SCCDFS_Visit(i->second);
+		}
+		std::cout<<std::endl;
+	}
+}
+
+template<class T>
+void Graph<T>::SCCDFS_Visit(int node){
+	time++;
+	v[node].color=GREY;
+	for(auto i=v[node].verticesParent.begin(); i!=v[node].verticesParent.end(); ++i){
+		if(v[*i].color == WHITE){
+			v[*i].P=node;
+			SCCDFS_Visit(*i);
+		}
+	}
+	v[node].color=BLACK;
+	time++;
+	std::cout<<v[node].data<<" ";
 }

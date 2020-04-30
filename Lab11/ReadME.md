@@ -19,9 +19,17 @@
     3. print : This will run O(v+e) is the fancy way of saying it. I run through ever node and print it and it's other vertices that is points to.
       * Worst case: O(n^2) - This comes from the case that all vertices have an edge to ever vertex in the graph. So there will be n elements with n items in it's vector of edges.
       * Best case: O(n) - This comes from the case that all vertices do not have any edges
-    4. printBFS : This runs O(v+e) is the fancy way of saying it. I run through every node only once in the while loop but I then check each nodes edges/children to see if they have been accounted for and if not add them to the list of stuff that needs to be accounted for.
+    4. DFS : O(e+v)
       * Worst case: O(n^2) - This comes from the case that all vertices have an edge to ever vertex in the graph. So there will be n elements with n items in it's vector of edges.
       * Best case: O(n) - This comes from the case that all vertices do not have any edges
+    5. Topological Sort : O(e+v) : Difference between this and DFS is that this sort will make a new map and fill it with a loop of O(v) and print with O(v)
+      * Worst case: O(n^2) - This comes from the case that all vertices have an edge to ever vertex in the graph. So there will be n elements with n items in it's vector of edges.
+      * Best case: O(n) - This comes from the case that all vertices do not have any edges
+    6. SCC : O(v+e) : Difference between this and DFS is that 
+      * Worst case: O(n^2) - This comes from the case that all vertices have an edge to ever vertex in the graph. So there will be n elements with n items in it's vector of edges.
+      * Best case: O(n) - This comes from the case that all vertices do not have any edges
+
+    These all have very the same big O's because they all call DFS and us the data made from DFS to formulate extra data about the graph. All the big O's are different base multiples of v and e
 
 #### (c)  How could the code be improved in terms of usability, efficiency, and robustness?
   I wish I had caught myself earlier on in my BFS implementation with my mess of .find() function calls and operator[] calls and stuck to one or the other (I would rather have operator []). I also could clean some of these functions if statements checking if the function was called on valid data.
