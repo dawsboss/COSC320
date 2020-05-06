@@ -7,6 +7,7 @@
 #include <queue>//std::queue
 #include <algorithm>//std::sort
 #include <fstream>//read in File
+#include <time.h>//rand
 
 template<class T>
 class Graph{
@@ -72,6 +73,8 @@ class Graph{
 		void SCC();
 		bool isVertexCover(std::vector<int>);
 		std::vector<int> AVC();
+		std::vector<int> RAVC();
+		std::vector<int> BVC();
 };
 
 #include "Graph.cpp"

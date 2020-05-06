@@ -4,8 +4,8 @@
 
 ### In this lab you will focus on the following objectives:
 *  Review basic graph representations and operations
-*  Develop familiarity with the c++ standard library tools.
-*  Solve the problems of implementing abstract algorithms with programming languages.
+*  Develop familiarity with the c++ standard library tools
+*  Implement method to find an approximate vertex cover of a simple undirected graph
 ## Questions:
 
 #### (a)  Summarize your approach to the problem, and how your code addresses the abstractions needed.
@@ -33,3 +33,16 @@
 
 #### (c)  How could the code be improved in terms of usability, efficiency, and robustness?
     There are no real improvements I could see that I need to do. The Graph class is efficient on memory/it isn't throwing around data T around but indexes. Perhaps instead of automatically saving the transpose only do it while requested.
+
+
+#### (a)  Summarize your approach to the problem, and how your code addresses the abstractions needed.
+    I started out by taking all the code from my previous lab 11 and proceeded to add on to it. I added three new functions and a new vector for the whole class called "Edges." The new vector will hold every edge between all nodes. This new vector will be used in the new functions, AVC, RAVC, and BVC.
+      1. AVC  - Approximate vertex cover
+      2. RAVC - Random approximate vertex cover
+      3. BVC  - Brute-force vertex cover
+#### (b)  What is the theoretical time complexity of your algorithms (best and worst case), in terms of the size of the tree?  Be sure to vary the parameters enough to use the observations to answer the next questions!
+    
+#### (c)  Find and provide some specific graph instances where the computed cover is always suboptimal.Show how bad the approximation is and how closes it gets to its best and worst theoretical case.
+#### (d)  For what graph structures is the algorithm close to the optimal?  Far from it?
+#### (e)  How does the randomized version compare with the deterministic one on average?
+#### (f)  How could the code be improved in terms of usability, efficiency, and robustness?

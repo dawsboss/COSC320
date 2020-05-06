@@ -262,7 +262,33 @@ std::vector<int> Graph<T>::AVC(){
 				++j;
 			}
 		}
+	}
+	return rtn;
+}
 
+
+template<class T>
+std::vector<int> Graph<T>::RAVC(){
+	std::vector<int> rtn;
+	std::vector<std::pair<int,int>> copyEdges = Edges;//copies the on going list of edges (don't want to ruin it)
+	int u,v;
+	while(!copyEdges.empty()){
+		auto i = copyEdges.begin();
+		for(int w=0; w<rand()%copyEdges.size(); w++){
+			++i;
+		}
+		rtn.push_back(i->first);
+		rtn.push_back(i->second);
+		u=i->first;
+		v=i->second;
+
+		for(auto j=copyEdges.begin(); j!=copyEdges.end(); ){
+			if(j->first==u || j->second==u || j->first==v || j->second==v){
+				j = copyEdges.erase(j);
+			}else{
+				++j;
+			}
+		}
 	}
 	return rtn;
 }
@@ -276,24 +302,58 @@ std::vector<int> Graph<T>::AVC(){
 template<class T>
 bool Graph<T>::isVertexCover(std::vector<int> d){
 	for(auto i=Edges.begin(); i!=Edges.end(); ++i){
-		for(auto j=d.begin(); j!=d.end(); ++j)
-			if(i->first!=*j && i->second!=*j){
-				return false;
+		//std::cout<<"testing edges"<<std::endl;
+		bool covered=false;
+		for(auto j=d.begin(); j!=d.end(); ++j){
+			//std::cout<<"isVertexCover===\n	i-first: "<<i->first<<" i-second: "<<i->second<<" *j: "<<*j<<std::endl;
+			if(i->first==*j || i->second==*j){
+				covered = true;
 			}
+		}
+		if(!covered)
+			return false;
 	}
 	return true;
 }
-void BVC(){
+
+//
+template<class T>
+std::vector<int> Graph<T>::BVC(){
 	std::vector<int> tester;
-	auto somehting;
-	for(int i=1; i<v.size(); i++){
-		for(auto j=v.begin(); j!=v.end(); ++j){
-			int counter=i;
-			for(auto w=j; counter; --w){
-				tester.push_back(j+i);
-				counter++;
+	std::vector<int> rtn;
+	int binary;
+
+	// 1 == 0000001 == 1 << 0 == 1 << (1-1)
+	// 2 == 0000010 == 1 << 1 == 1 << (2-1)
+	// 4 == 0000100 == 1 << 2
+
+	int n = v.size();
+	int rtnSize = n+1;
+	// to check the 3rd bit, e.g. 0100)2 = 4)10
+	// binary & 4 == 1 iff the 3rd bit is 1
+
+	// test every binary up to 2^n - 1
+	for(binary = 0; binary < 1<<n; binary++){
+		tester.clear(); // empty out tester
+
+		// e.g. binary == 12_10 == 01100_2
+
+		// for every "1" in the binary put the corresponding vertex into tester
+		for(int i = 0; i<n; i++){
+		  // to check the ith bit:
+			if(binary & 1<<i){
+				// add v[i] to the subset
+				tester.push_back(i+1);
+				//std::cout << i+1 << " ";
 			}
 		}
+		//std::cout << std::endl;
+		// if isCover(test) blah blah
+		if(isVertexCover(tester) && tester.size() < rtnSize){
+			//std::cout<<"AM I true?"<<std::endl;
+			rtn=tester;
+			rtnSize=rtn.size();
+		}
 	}
-
+	return rtn;
 }

@@ -2,6 +2,7 @@
 
 
 int main(){
+	srand(time(0));
 	Graph<int> t(true);
 	t.addVertex(5,1);
 	//t.addEdge(5,5);
@@ -243,13 +244,32 @@ int main(){
 
 	std::cout<<std::endl;
 	std::cout<<"AVC: "<<std::endl;
-	std::cout<<std::endl;
+
 
 	std::vector<int> bruh = fileLad.AVC();
 	for(auto i=bruh.begin(); i!=bruh.end(); ++i){
 		std::cout<<*i<<" ";
 	}
 
+	std::cout<<std::endl;
+	std::cout<<"RAVC: "<<std::endl;
+
+
+	bruh = fileLad.RAVC();
+	for(auto i=bruh.begin(); i!=bruh.end(); ++i){
+		std::cout<<*i<<" ";
+	}
+
+	std::cout<<std::endl;
+	std::cout<<"BVC: "<<std::endl;
+
+
+	bruh = fileLad.BVC();
+	for(auto i=bruh.begin(); i!=bruh.end(); ++i){
+		std::cout<<*i<<" ";
+	}
+
+		std::cout<<std::endl;
 
 	std::cout<<"End"<<std::endl;
 
