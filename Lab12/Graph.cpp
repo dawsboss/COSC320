@@ -248,6 +248,14 @@ std::vector<int> Graph<T>::AVC(){
 	std::vector<int> rtn;
 	std::vector<std::pair<int,int>> copyEdges = Edges;//copies the on going list of edges (don't want to ruin it)
 	int u,v;
+
+	// if(copyEdges.empty()){
+	// 	for(auto i=v.begin(); i!=v.end(); ++i){
+	// 		rtn.push_back(i->first);
+	// 	}
+	// 	return rtn;
+	// }
+
 	while(!copyEdges.empty()){
 		auto i = copyEdges.begin();
 		rtn.push_back(i->first);
@@ -272,6 +280,14 @@ std::vector<int> Graph<T>::RAVC(){
 	std::vector<int> rtn;
 	std::vector<std::pair<int,int>> copyEdges = Edges;//copies the on going list of edges (don't want to ruin it)
 	int u,v;
+
+	// if(copyEdges.empty()){
+	// 	for(auto i=v.begin(); i!=v.end(); ++i){
+	// 		rtn.push_back(i->first);
+	// 	}
+	// 	return rtn;
+	// }
+
 	while(!copyEdges.empty()){
 		auto i = copyEdges.begin();
 		for(int w=0; w<rand()%copyEdges.size(); w++){
