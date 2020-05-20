@@ -32,12 +32,12 @@
       * Best case: O(n) - This comes from the case that all vertices do not have any edges
 
     These all have very the same big O's because they all call DFS and us the data made from DFS to formulate extra data about the graph. All the big O's are different base multiples of v and e
-    7. AVC  - O()
+
+    7. AVC  - O(v+e)
       * Worst case: When for every 2 nodes there is an edge between them. Each node has one edge with on other node. This case comes from when it takes the most nodes to cover the whole graph (directed). In this case it would give you your min vertex cover.
       * Best case: When every edge has at least one of the same node/the is when central node.  This means when you do the first loops of the while loop you will be done because one of the nodes were in every single edge and will return after the first loop.
-    8. RAVC - O()
+    8. RAVC - O(v+e)
     * Worst case: When for every 2 nodes there is an edge between them. Each node has one edge with on other node. This case comes from when it takes the most nodes to cover the whole graph (directed). In this case it would give you your min vertex cover.
-    * Average case:
     * Best case: When every edge has at least one of the same node/the is when central node.  This means when you do the first loops of the while loop you will be done because one of the nodes were in every single edge and will return after the first loop.
     9. BVC  - O((V+E)2^n)
       * Best/Worst case: This being the brute force method of solving the problem, it is extremely inefficient and runs the same amount of time just depending on how many nodes you have (n).
